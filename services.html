@@ -49,9 +49,9 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap">
   </noscript>
-  <link rel="stylesheet" href="style.css?v=10" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="style.css?v=11" media="print" onload="this.media='all'">
   <noscript>
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
   </noscript>
 
   <meta property="og:title" content="Kitchen Fitting & Bespoke Joinery | Widnes, Liverpool & Cheshire | EB Joinery" />
@@ -66,23 +66,21 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-logo"
-      style="display: flex; align-items: center; gap: 8px;">
+    <a href="index.html" class="nav-logo" style="display: flex; align-items: center; gap: 8px;">
       <img src="https://res.cloudinary.com/die5rq3ua/image/upload/v1772713832/eb_joinery_navbar_txakzc.webp"
         alt="EB Joinery Logo" class="brand-logo">
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html" data-page="home" >Home</a></li>
+      <li><a href="index.html" data-page="home">Home</a></li>
       <li><a href="portfolio.html" data-page="portfolio">Portfolio</a></li>
       <li><a href="services.html" data-page="services" class="active">Services</a></li>
       <li><a href="about.html" data-page="about">About</a></li>
-      <li><a href="testimonials.html"
-          data-page="testimonials">Testimonials</a></li>
+      <li><a href="testimonials.html" data-page="testimonials">Testimonials</a></li>
       <li><a href="blog.html" data-page="blog">Blog</a></li>
       <li><a href="contact.html" class="nav-cta" data-page="contact">Get a
           Quote</a>
       </li>
-      
+
     </ul>
     <div class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
   </nav>
@@ -96,149 +94,209 @@
     <a href="testimonials.html">Testimonials</a>
     <a href="blog.html">Blog</a>
     <a href="contact.html">Get a Quote</a>
-    
+
   </div>
   <main>
+    <header class="page-hero">
+      <div class="page-hero-eyebrow">What We Do</div>
+      <h1>Our <em>Services</em></h1>
+      <p class="page-hero-sub">Complete home improvement from foundations to finishing touches — all trades, one trusted
+        team across the Northwest.</p>
+    </header>
 
-      <section class="fade-up">
-        <div class="section-label">Services</div>
-        <div class="section-title">What We <em>Offer</em></div>
-        <p class="section-subtitle">Complete home improvement from foundations to finishing touches. All trades in one
-          trusted team.</p>
-      </section>
-      <div style="padding:0 8vw 6rem">
-        <div style="display:grid;gap:3px;background:var(--grey-mid)">
-          <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
-            <div style="padding:4rem;background:var(--grey-light)">
-              <div class="service-carousel" data-pool="kitchens"
-                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
-              </div>
-            </div>
-            <div style="padding:4rem">
-              <div class="section-label">01</div>
-              <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Fitted Kitchens</div>
-              <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Our kitchens are
-                designed around your life. We use premium materials and precision joinery to create spaces that are as
-                functional as they are beautiful.</p>
-              <ul style="list-style:none;margin-bottom:2rem">
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Full design consultation
-                </li>
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Custom cabinet making
-                </li>
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Worktop templating & fitting
-                </li>
-                <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
-                    style="color:var(--accent)">✓</span>Full installation & finishing</li>
-              </ul>
-              <a class="btn-primary" href="contact.html">Get a Kitchen Quote</a>
+    <div style="padding:0 8vw 6rem">
+      <div style="display:grid;gap:3px;background:var(--grey-mid)">
+        <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
+          <div style="padding:4rem;background:var(--grey-light)">
+            <div class="service-carousel" data-pool="kitchens"
+              style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
             </div>
           </div>
-          <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
-            <div style="padding:4rem">
-              <div class="section-label">02</div>
-              <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Loft Conversions</div>
-              <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Transform your
-                unused loft into a beautiful, fully usable room. We handle everything from structural work and
-                insulation
-                right through to plastering, electrics and joinery.</p>
-              <ul style="list-style:none;margin-bottom:2rem">
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Dormer & Velux conversions
-                </li>
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Planning & building regs guidance
-                </li>
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Staircase installation
-                </li>
-                <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
-                    style="color:var(--accent)">✓</span>Full fit-out to decoration stage</li>
-              </ul>
-              <a class="btn-primary" href="contact.html">Get a Loft Quote</a>
-            </div>
-            <div style="padding:4rem;background:var(--grey-light)">
-              <div class="service-carousel" data-pool="loft"
-                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
-              </div>
+          <div style="padding:4rem">
+            <div class="section-label">01</div>
+            <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Fitted Kitchens</div>
+            <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Our kitchens are
+              designed around your life. We use premium materials and precision joinery to create spaces that are as
+              functional as they are beautiful.</p>
+            <ul style="list-style:none;margin-bottom:2rem">
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Full design consultation
+              </li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Custom cabinet making
+              </li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Worktop templating & fitting
+              </li>
+              <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
+                  style="color:var(--accent)">✓</span>Full installation & finishing</li>
+            </ul>
+            <a class="btn-primary" href="contact.html">Get a Kitchen Quote</a>
+          </div>
+        </div>
+        <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
+          <div style="padding:4rem">
+            <div class="section-label">02</div>
+            <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Loft Conversions</div>
+            <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Transform your
+              unused loft into a beautiful, fully usable room. We handle everything from structural work and
+              insulation
+              right through to plastering, electrics and joinery.</p>
+            <ul style="list-style:none;margin-bottom:2rem">
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Dormer & Velux conversions
+              </li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Planning & building regs guidance
+              </li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Staircase installation
+              </li>
+              <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
+                  style="color:var(--accent)">✓</span>Full fit-out to decoration stage</li>
+            </ul>
+            <a class="btn-primary" href="contact.html">Get a Loft Quote</a>
+          </div>
+          <div style="padding:4rem;background:var(--grey-light)">
+            <div class="service-carousel" data-pool="loft"
+              style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
             </div>
           </div>
-          <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
-            <div style="padding:4rem;background:var(--grey-light)">
-              <div class="service-carousel" data-pool="bathrooms"
-                style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
-              </div>
+        </div>
+        <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
+          <div style="padding:4rem;background:var(--grey-light)">
+            <div class="service-carousel" data-pool="bathrooms"
+              style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
             </div>
-            <div style="padding:4rem">
-              <div class="section-label">03</div>
-              <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Bathroom Fitting</div>
-              <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Complete bathroom
-                installation and renovation. From a simple suite swap to a full wet room, we manage every element with
-                care.</p>
-              <ul style="list-style:none;margin-bottom:2rem">
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Full strip-out & preparation
-                </li>
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Tiling, plumbing & electrics
-                </li>
-                <li
-                  style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
-                  <span style="color:var(--accent)">✓</span>Bespoke vanity & storage joinery
-                </li>
-                <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
-                    style="color:var(--accent)">✓</span>Wet rooms & accessible bathrooms</li>
-              </ul>
-              <a class="btn-primary" href="contact.html">Get a Bathroom Quote</a>
+          </div>
+          <div style="padding:4rem">
+            <div class="section-label">03</div>
+            <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Bathroom Fitting</div>
+            <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Complete bathroom
+              installation and renovation. From a simple suite swap to a full wet room, we manage every element with
+              care.</p>
+            <ul style="list-style:none;margin-bottom:2rem">
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Full strip-out & preparation
+              </li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Tiling, plumbing & electrics
+              </li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Bespoke vanity & storage joinery
+              </li>
+              <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
+                  style="color:var(--accent)">✓</span>Wet rooms & accessible bathrooms</li>
+            </ul>
+            <a class="btn-primary" href="contact.html">Get a Bathroom Quote</a>
+          </div>
+        </div>
+        <!-- Staircases Row -->
+        <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
+          <div style="padding:4rem">
+            <div class="section-label">04</div>
+            <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Staircases &amp; Joinery
             </div>
+            <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Bespoke staircases,
+              doors, windows, skirting boards, fitted wardrobes and all joinery work — crafted from premium hardwoods
+              and softwoods to exact specification.</p>
+            <ul style="list-style:none;margin-bottom:2rem">
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Custom staircase design &amp; build</li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Bespoke fitted wardrobes</li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Skirting, architrave &amp; door fitting</li>
+              <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
+                  style="color:var(--accent)">✓</span>Premium hardwood &amp; softwood joinery</li>
+            </ul>
+            <a class="btn-primary" href="contact.html">Get a Joinery Quote</a>
+          </div>
+          <div style="padding:4rem;background:var(--grey-light)">
+            <div class="service-carousel" data-pool="staircases"
+              style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
+            </div>
+          </div>
+        </div>
+        <!-- Extensions Row -->
+        <div style="background:var(--white);display:grid;grid-template-columns:1fr 1fr">
+          <div style="padding:4rem;background:var(--grey-light)">
+            <div class="service-carousel" data-pool="outdoor"
+              style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; height: 100%; min-height: 300px;">
+            </div>
+          </div>
+          <div style="padding:4rem">
+            <div class="section-label">05</div>
+            <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Extensions &amp; Garden
+              Rooms</div>
+            <p style="color:var(--grey-dark);line-height:1.8;margin-bottom:1.5rem;font-size:0.92rem">Single and
+              double-storey extensions, garden rooms, and outdoor living spaces that add real living space and lasting
+              value to your property.</p>
+            <ul style="list-style:none;margin-bottom:2rem">
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Single &amp; double-storey extensions</li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Fully insulated garden rooms</li>
+              <li
+                style="padding:0.4rem 0;border-bottom:1px solid var(--grey-light);font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem">
+                <span style="color:var(--accent)">✓</span>Hardwood decking &amp; pergolas</li>
+              <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
+                  style="color:var(--accent)">✓</span>Planning &amp; building regs guidance</li>
+            </ul>
+            <a class="btn-primary" href="contact.html">Get an Extension Quote</a>
           </div>
         </div>
       </div>
-      <!-- Process -->
-      <section style="background:var(--black);color:white">
-        <div class="section-label" style="color:var(--accent)">How We Work</div>
-        <h2 class="section-title" style="color:white">Our <em>Process</em></h2>
-        <div
-          style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:4rem;background:rgba(255,255,255,0.04)">
-          <div style="padding:2.5rem;background:var(--black)">
-            <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">01</div>
-            <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Consultation</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">We visit, listen to your vision,
-              and
-              discuss options, materials and budget — no pressure.</p>
-          </div>
-          <div style="padding:2.5rem;background:var(--black)">
-            <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">02</div>
-            <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Design & Quote</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">Detailed plans and a fully
-              transparent, itemised quote. No hidden costs.</p>
-          </div>
-          <div style="padding:2.5rem;background:var(--black)">
-            <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">03</div>
-            <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Building</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">Our skilled team executes every
-              element using quality materials and proven techniques.</p>
-          </div>
-          <div style="padding:2.5rem;background:var(--black)">
-            <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">04</div>
-            <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Handover</div>
-            <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">Final walk-through, snag list
-              resolved, site left clean. We don't leave until you're 100% happy.</p>
-          </div>
+    </div>
+    <!-- Process -->
+    <section style="background:var(--black);color:white">
+      <div class="section-label" style="color:var(--accent)">How We Work</div>
+      <h2 class="section-title" style="color:white">Our <em>Process</em></h2>
+      <div
+        style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:4rem;background:rgba(255,255,255,0.04)">
+        <div style="padding:2.5rem;background:var(--black)">
+          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">01</div>
+          <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Consultation</div>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">We visit, listen to your vision,
+            and
+            discuss options, materials and budget — no pressure.</p>
         </div>
-      </section>
+        <div style="padding:2.5rem;background:var(--black)">
+          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">02</div>
+          <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Design & Quote</div>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">Detailed plans and a fully
+            transparent, itemised quote. No hidden costs.</p>
+        </div>
+        <div style="padding:2.5rem;background:var(--black)">
+          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">03</div>
+          <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Building</div>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">Our skilled team executes every
+            element using quality materials and proven techniques.</p>
+        </div>
+        <div style="padding:2.5rem;background:var(--black)">
+          <div style="font-family:var(--font-display);font-size:3rem;color:var(--accent);margin-bottom:1rem">04</div>
+          <div style="font-family:var(--font-display);font-size:1.2rem;margin-bottom:0.6rem">Handover</div>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.7">Final walk-through, snag list
+            resolved, site left clean. We don't leave until you're 100% happy.</p>
+        </div>
+      </div>
+    </section>
 
-</main>
+  </main>
 
   <aside class="global-cta fade-up">
     <h2>Ready to Start Your Project?</h2>
@@ -299,11 +357,11 @@
     </div>
   </footer>
 
-  
 
-  
 
-  <script src="main.js?v=10" defer></script>
+
+
+  <script src="main.js?v=11" defer></script>
 </body>
 
 </html>

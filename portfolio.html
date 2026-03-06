@@ -49,9 +49,9 @@
     <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap">
   </noscript>
-  <link rel="stylesheet" href="style.css?v=10" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="style.css?v=11" media="print" onload="this.media='all'">
   <noscript>
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
   </noscript>
 
   <meta property="og:title" content="Kitchen Fitting & Bespoke Joinery | Widnes, Liverpool & Cheshire | EB Joinery" />
@@ -66,23 +66,21 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-logo"
-      style="display: flex; align-items: center; gap: 8px;">
+    <a href="index.html" class="nav-logo" style="display: flex; align-items: center; gap: 8px;">
       <img src="https://res.cloudinary.com/die5rq3ua/image/upload/v1772713832/eb_joinery_navbar_txakzc.webp"
         alt="EB Joinery Logo" class="brand-logo">
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html" data-page="home" >Home</a></li>
+      <li><a href="index.html" data-page="home">Home</a></li>
       <li><a href="portfolio.html" data-page="portfolio" class="active">Portfolio</a></li>
       <li><a href="services.html" data-page="services">Services</a></li>
       <li><a href="about.html" data-page="about">About</a></li>
-      <li><a href="testimonials.html"
-          data-page="testimonials">Testimonials</a></li>
+      <li><a href="testimonials.html" data-page="testimonials">Testimonials</a></li>
       <li><a href="blog.html" data-page="blog">Blog</a></li>
       <li><a href="contact.html" class="nav-cta" data-page="contact">Get a
           Quote</a>
       </li>
-      
+
     </ul>
     <div class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
   </nav>
@@ -96,29 +94,35 @@
     <a href="testimonials.html">Testimonials</a>
     <a href="blog.html">Blog</a>
     <a href="contact.html">Get a Quote</a>
-    
+
   </div>
   <main>
+    <header class="page-hero">
+      <div class="page-hero-eyebrow">Our Work</div>
+      <h1>Project <em>Portfolio</em></h1>
+      <p class="page-hero-sub">Browse 500+ home transformations across Widnes, Liverpool, Cheshire and the wider
+        Northwest.</p>
+    </header>
 
-      <section class="fade-up">
-        <div class="section-label">Our Portfolio</div>
-        <div class="section-title">Project <em>Gallery</em></div>
-        <p class="section-subtitle">Browse completed projects across every trade. Each one a testament to quality
-          craftsmanship and attention to detail.</p>
-        <div class="portfolio-filter" id="portfolio-filter">
-          <button class="filter-btn active" onclick="filterPortfolio('all',this)">All Projects</button>
-          <button class="filter-btn" onclick="filterPortfolio('kitchens',this)">Kitchens</button>
-          <button class="filter-btn" onclick="filterPortfolio('loft-conversions',this)">Loft Conversions</button>
-          <button class="filter-btn" onclick="filterPortfolio('bathrooms',this)">Bathrooms</button>
-          <button class="filter-btn" onclick="filterPortfolio('staircases',this)">Staircases</button>
-          <button class="filter-btn" onclick="filterPortfolio('extensions',this)">Extensions</button>
-          <button class="filter-btn" onclick="filterPortfolio('joinery',this)">Joinery</button>
-          <button class="filter-btn" onclick="filterPortfolio('outdoor',this)">Outdoor</button>
-        </div>
-        <div class="portfolio-grid" id="main-portfolio-grid"></div>
-      </section>
+    <section class="fade-up">
+      <div class="section-label">Our Portfolio</div>
+      <div class="section-title">Project <em>Gallery</em></div>
+      <p class="section-subtitle">Browse completed projects across every trade. Each one a testament to quality
+        craftsmanship and attention to detail.</p>
+      <div class="portfolio-filter" id="portfolio-filter">
+        <button class="filter-btn active" onclick="filterPortfolio('all',this)">All Projects</button>
+        <button class="filter-btn" onclick="filterPortfolio('kitchens',this)">Kitchens</button>
+        <button class="filter-btn" onclick="filterPortfolio('loft-conversions',this)">Loft Conversions</button>
+        <button class="filter-btn" onclick="filterPortfolio('bathrooms',this)">Bathrooms</button>
+        <button class="filter-btn" onclick="filterPortfolio('staircases',this)">Staircases</button>
+        <button class="filter-btn" onclick="filterPortfolio('extensions',this)">Extensions</button>
+        <button class="filter-btn" onclick="filterPortfolio('joinery',this)">Joinery</button>
+        <button class="filter-btn" onclick="filterPortfolio('outdoor',this)">Outdoor</button>
+      </div>
+      <div class="portfolio-grid" id="main-portfolio-grid"></div>
+    </section>
 
-</main>
+  </main>
 
   <aside class="global-cta fade-up">
     <h2>Ready to Start Your Project?</h2>
@@ -179,11 +183,11 @@
     </div>
   </footer>
 
-  
 
-  
 
-  <script src="main.js?v=10" defer></script>
+
+
+  <script src="main.js?v=11" defer></script>
 </body>
 
 </html>
