@@ -416,22 +416,22 @@ function showToast(msg) {
    INIT
 ═══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', async () => {
-  initFeaturedHero();
-  initServiceCarousels();
+  const path = window.location.pathname;
+  const page = path.split('/').pop() || 'index.html';
 
-  // Try to load external data, fallback to hardcoded if fail
+  // Load dynamic data silently — fallback to hardcoded if unavailable
   try {
+    const base = window.location.origin;
     const [revRes, postRes, manifestRes] = await Promise.all([
-      fetch('data/reviews.json').then(r => r.ok ? r.json() : null),
-      fetch('data/posts.json').then(r => r.ok ? r.json() : null),
-      fetch('data/image_manifest.json').then(r => r.ok ? r.json() : null)
+      fetch(base + '/data/reviews.json').then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch(base + '/data/posts.json').then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch(base + '/data/image_manifest.json').then(r => r.ok ? r.json() : null).catch(() => null)
     ]);
 
-    if (revRes) testimonials = revRes;
-    if (postRes) blogPosts = postRes;
+    if (revRes && revRes.length) testimonials = revRes;
+    if (postRes && postRes.length) blogPosts = postRes;
 
     if (manifestRes) {
-      // Merge manifest URLs into imagePools
       Object.keys(manifestRes).forEach(cat => {
         const manifestUrls = manifestRes[cat].map(img => img.url);
         if (imagePools[cat]) {
@@ -442,24 +442,39 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
 
-    // REBUILD Data objects after merged manifest/remote posts
     initDataObjects();
-
   } catch (err) {
-    console.warn('Dynamic data load failed, using fallbacks');
+    // silently use hardcoded fallbacks
   }
 
-  // Scroll Animations
+  // Always init scroll animations and mobile nav
   initScrollAnimations();
 
-  // Final Render
-  renderHomePortfolio();
-  renderReviews();
-  renderBlog();
-  renderPortfolio();
+  // Page-specific rendering — only runs what this page actually needs
+  if (page === 'index.html' || page === '') {
+    initFeaturedHero();
+    initServiceCarousels();
+    renderHomePortfolio();
+  }
 
-  if (window.location.pathname.includes('blog-post.html')) {
+  if (page === 'portfolio.html') {
+    renderPortfolio();
+  }
+
+  if (page === 'testimonials.html') {
+    renderReviews();
+  }
+
+  if (page === 'blog.html') {
+    renderBlog();
+  }
+
+  if (page === 'blog-post.html') {
     initBlogPost();
+  }
+
+  if (page === 'services.html') {
+    initServiceCarousels();
   }
 });
 
