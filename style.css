@@ -265,8 +265,8 @@ main.hero-main {
 .hero-left {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 6vw 5vw 6vw 8vw;
+  justify-content: flex-start;
+  padding: 4.5rem 5vw 4rem 8vw;
   position: relative;
   z-index: 2;
 }
@@ -650,6 +650,7 @@ section {
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 280px;
   gap: 1.5rem;
 }
 
@@ -657,8 +658,6 @@ section {
 .portfolio-card {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4/3;
-  max-height: 320px;
   cursor: pointer;
   background: var(--grey-light);
   border-radius: var(--radius-sm);
