@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kitchen Fitting & Bespoke Joinery | Widnes, Liverpool & Cheshire | EB Joinery</title>
+  <meta name="description"
+    content="Expert joinery & home improvement services across Widnes, Liverpool & Cheshire. Quality craftsmanship, competitive prices. Call EB Joinery today for a free quote.">
+  <link rel="canonical" href="https://ebjoinery.co.uk/">
+  <meta name="robots" content="index, follow">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "EB Joinery",
+    "image": "https://res.cloudinary.com/die5rq3ua/image/upload/v1772713832/eb_joinery_navbar_txakzc.webp",
+    "url": "https://ebjoinery.co.uk/",
+    "telephone": "07803676949",
+    "email": "ed@ebjoinery.co.uk",
+    "priceRange": "££",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Widnes",
+      "addressRegion": "Cheshire",
+      "addressCountry": "UK"
+    },
+    "areaServed": [
+      "Widnes", "Liverpool", "Speke", "Warrington", "Runcorn", 
+      "Halton", "Cheshire", "Manchester", "St Helens", 
+      "Wirral", "Merseyside", "Northwest England"
+    ],
+    "openingHours": "Mo,Tu,We,Th,Fr 07:00-18:00 Sa 08:00-14:00"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=8">
+</head>
+
+<body>
+
+<!-- ══════════════════════════
+     ADMIN PANEL MODAL
+══════════════════════════ -->
+  <div class="modal-overlay" id="admin-modal">
+    <div class="admin-panel-box">
+      <div class="admin-header">
+        <div>
+          <div class="admin-header-title">EB CONTENT MANAGER</div>
+          <div class="admin-header-sub">Logged in as Ed Bates</div>
+        </div>
+        <button class="admin-close" onclick="closeAdminPanel()">✕ Close</button>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('photos',this)">📷 Add Photos</button>
+        <button class="admin-tab" onclick="switchTab('manage',this)">🗂 Manage Photos</button>
+        <button class="admin-tab" onclick="switchTab('blog',this)">✏️ Blog Posts</button>
+        <button class="admin-tab" onclick="switchTab('testimonials',this)">⭐ Testimonials</button>
+      </div>
+
+      <!-- ── TAB: ADD PHOTOS (BATCH) ── -->
+      <div class="admin-tab-content active" id="tab-photos">
+        <div class="admin-section-title">BATCH PHOTO UPLOAD — Select photos, assign each one to an area, then click
+          Upload All</div>
+
+        <div class="batch-drop" id="batch-drop" onclick="document.getElementById('batch-file-input').click()">
+          <div class="drop-icon">☁️</div>
+          <p><strong>Click to select photos</strong> or drag & drop here</p>
+          <p>You can select multiple at once — JPG, PNG supported</p>
+        </div>
+        <input type="file" id="batch-file-input" accept="image/*" multiple onchange="handleBatchSelect(event)">
+
+        <div id="batch-queue"></div>
+        <div class="batch-count" id="batch-count"></div>
+
+        <div class="batch-actions" id="batch-actions" style="display:none">
+          <button class="admin-btn" onclick="setAllCategory()">Set All to Same Area →</button>
+          <select class="admin-select" id="bulk-cat-select" style="width:auto;flex:1">
+            <option value="kitchens">Fitted Kitchens</option>
+            <option value="loft">Loft Conversions</option>
+            <option value="bathrooms">Bathrooms</option>
+            <option value="staircases">Staircases</option>
+            <option value="extensions">Extensions</option>
+            <option value="joinery">Joinery / Doors / Windows</option>
+            <option value="outdoor">Outdoor / Decking</option>
+          </select>
+          <button class="admin-btn" onclick="uploadAllPhotos()" style="background:var(--accent)">✓ Upload All to
+            Portfolio</button>
+          <button class="admin-btn secondary" onclick="clearBatch()">Clear</button>
+        </div>
+
+        <div style="margin-top:2rem">
+          <div class="admin-section-title">AREA REFERENCE — Where each category appears</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.5rem">
+            <div
+              style="background:rgba(255,255,255,0.04);padding:0.7rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.55)">
+              🍳 <strong style="color:rgba(255,255,255,0.8)">Kitchens</strong> — Kitchen portfolio + services page</div>
+            <div
+              style="background:rgba(255,255,255,0.04);padding:0.7rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.55)">
+              🏗️ <strong style="color:rgba(255,255,255,0.8)">Loft</strong> — Loft conversions gallery</div>
+            <div
+              style="background:rgba(255,255,255,0.04);padding:0.7rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.55)">
+              🛁 <strong style="color:rgba(255,255,255,0.8)">Bathrooms</strong> — Bathroom fitting gallery</div>
+            <div
+              style="background:rgba(255,255,255,0.04);padding:0.7rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.55)">
+              🪜 <strong style="color:rgba(255,255,255,0.8)">Staircases</strong> — Staircase gallery</div>
+            <div
+              style="background:rgba(255,255,255,0.04);padding:0.7rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.55)">
+              🏠 <strong style="color:rgba(255,255,255,0.8)">Extensions</strong> — Extensions gallery</div>
+            <div
+              style="background:rgba(255,255,255,0.04);padding:0.7rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.55)">
+              🚪 <strong style="color:rgba(255,255,255,0.8)">Joinery</strong> — Doors, windows, skirting</div>
+            <div
+              style="background:rgba(255,255,255,0.04);padding:0.7rem 1rem;font-size:0.78rem;color:rgba(255,255,255,0.55)">
+              🌿 <strong style="color:rgba(255,255,255,0.8)">Outdoor</strong> — Decking & garden rooms</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TAB: MANAGE PHOTOS ── -->
+      <div class="admin-tab-content" id="tab-manage">
+        <div class="admin-section-title">ALL PORTFOLIO PHOTOS — Click delete to remove</div>
+        <table class="manage-table" id="manage-table">
+          <thead>
+            <tr>
+              <th>Photo</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody id="manage-tbody"></tbody>
+        </table>
+      </div>
+
+      <!-- ── TAB: BLOG ── -->
+      <div class="admin-tab-content" id="tab-blog">
+        <div class="admin-section-title">WRITE A NEW BLOG POST</div>
+        <label class="admin-label">Post Title</label>
+        <input class="admin-input" id="blog-title" placeholder="e.g. Our latest loft conversion in Stockport">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
+          <div><label class="admin-label">Author</label><input class="admin-input" id="blog-author"
+              placeholder="Ed Bates" value="Ed Bates"></div>
+          <div><label class="admin-label">Date</label><input class="admin-input" id="blog-date" type="date"></div>
+        </div>
+        <label class="admin-label">Tag / Category</label>
+        <select class="admin-select" id="blog-tag">
+          <option value="Tips">Tips & Advice</option>
+          <option value="Project">Project Update</option>
+          <option value="News">Company News</option>
+          <option value="Guide">How-to Guide</option>
+        </select>
+        <label class="admin-label">Post Content</label>
+        <textarea class="admin-textarea" id="blog-content" style="min-height:140px"
+          placeholder="Write your blog post here..."></textarea>
+        <button class="admin-btn full" onclick="addBlogPost()">✓ Publish Post</button>
+
+        <div style="margin-top:2rem">
+          <div class="admin-section-title">EXISTING POSTS</div>
+          <div id="blog-list-admin" style="display:flex;flex-direction:column;gap:0.4rem"></div>
+        </div>
+      </div>
+
+      <!-- ── TAB: TESTIMONIALS ── -->
+      <div class="admin-tab-content" id="tab-testimonials">
+        <div class="admin-section-title">ADD A CLIENT TESTIMONIAL</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
+          <div><label class="admin-label">Client Name</label><input class="admin-input" id="test-name"
+              placeholder="Sarah M."></div>
+          <div><label class="admin-label">Location</label><input class="admin-input" id="test-location"
+              placeholder="Manchester"></div>
+        </div>
+        <label class="admin-label">Testimonial Text</label>
+        <textarea class="admin-textarea" id="test-text"
+          placeholder="Paste or type the client's review here..."></textarea>
+        <label class="admin-label">Star Rating</label>
+        <select class="admin-select" id="test-stars">
+          <option value="5">★★★★★ 5 Stars</option>
+          <option value="4">★★★★☆ 4 Stars</option>
+          <option value="3">★★★☆☆ 3 Stars</option>
+        </select>
+        <button class="admin-btn full" onclick="addTestimonial()">✓ Add Testimonial</button>
+
+        <div style="margin-top:2rem">
+          <div class="admin-section-title">EXISTING TESTIMONIALS</div>
+          <div id="test-list-admin" style="display:flex;flex-direction:column;gap:0.4rem"></div>
+        </div>
+      </div>
+
+    </div><!-- end admin-panel-box -->
+  </div><!-- end admin-modal -->
+
+
+  <script src="main.js?v=8" defer></script>
+</body>
+</html>
