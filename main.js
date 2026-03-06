@@ -309,7 +309,7 @@ function renderHomePortfolio() {
   if (!c) return;
   const list = shuffle(portfolioItems).slice(0, 6);
   c.innerHTML = list.map(item => `
-    <div class="portfolio-item${item.large ? ' large' : ''}" data-cat="${item.category}">
+    <div class="portfolio-item" data-cat="${item.category}">
       <img src="${getOptimizedUrl(item.img, 600)}" alt="${item.title}" loading="lazy" width="600" height="400">
       <div class="portfolio-overlay">
         <div class="portfolio-cat">${catMeta[item.category]?.label || item.category}</div>
