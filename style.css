@@ -160,13 +160,8 @@ nav {
 
 /* ── PAGES ── */
 .page {
-  display: none;
-  padding-top: 72px;
-  min-height: 100vh;
-}
-
-.page.active {
-  display: block;
+  padding-top: 1rem;
+  min-height: auto;
 }
 
 /* ── HERO ── */
@@ -2050,13 +2045,8 @@ nav {
 
 /* ── PAGES ── */
 .page {
-  display: none;
-  padding-top: 72px;
-  min-height: 100vh;
-}
-
-.page.active {
-  display: block;
+  padding-top: 1rem;
+  min-height: auto;
 }
 
 /* ── HERO ── */
