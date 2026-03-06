@@ -191,8 +191,14 @@ function initServiceCarousels() {
 }
 
 /* ═══════════════════════════════════════
-   PORTFOLIO ITEMS (built from imagePools)
+   DATA INITIALIZATION (Async)
+   These are populated from hardcoded defaults,
+   then updated by remote JSON if available.
 ═══════════════════════════════════════ */
+let portfolioItems = [];
+let blogPosts = [];
+let testimonials = [];
+
 const titleMap = {
   kitchens: 'Kitchen Project',
   'loft-conversions': 'Loft Conversion',
@@ -203,32 +209,41 @@ const titleMap = {
   extensions: 'Extension',
 };
 
-let portfolioItems = [];
-let _pid = 1;
-Object.entries(imagePools).forEach(([cat, imgs]) => {
-  imgs.forEach((img, i) => {
-    portfolioItems.push({ id: _pid++, title: `${titleMap[cat]} ${i + 1}`, category: cat, img, large: i === 0 });
+function initDataObjects() {
+  // Clear and Rebuild Portfolio
+  portfolioItems = [];
+  let _pid = 1;
+  Object.entries(imagePools).forEach(([cat, imgs]) => {
+    imgs.forEach((img, i) => {
+      portfolioItems.push({ id: _pid++, title: `${titleMap[cat]} ${i + 1}`, category: cat, img, large: i === 0 });
+    });
   });
-});
 
-/* ═══════════════════════════════════════
-   BLOG & TESTIMONIALS
-═══════════════════════════════════════ */
-let blogPosts = [
-  { id: 1, featured: true, title: '5 Ways to Add Value to Your Home', author: 'Ed Bates', date: '12 Nov 2024', tag: 'Tips', excerpt: 'Quality home improvements can transform your property and significantly boost its market value. Here are five upgrades that offer the best return on investment...', img: imagePools.kitchens[0] },
-  { id: 2, title: 'How to Choose the Right Wood for Your Joinery', author: 'Ed Bates', date: '28 Oct 2024', tag: 'Guide', img: imagePools.joinery[0] },
-  { id: 3, title: 'Our Latest Loft Conversion — Before & After', author: 'Ed Bates', date: '5 Oct 2024', tag: 'Project', img: imagePools['loft-conversions'][0] },
-  { id: 4, title: 'Bathroom Trends for 2025', author: 'Ed Bates', date: '18 Sep 2024', tag: 'Tips', img: imagePools.bathrooms[0] },
-];
+  // Rebuild Blog (with fetched data if available, else fallback)
+  if (!blogPosts || blogPosts.length === 0) {
+    blogPosts = [
+      { id: 1, featured: true, title: '5 Ways to Add Value to Your Home', author: 'Ed Bates', date: '12 Nov 2024', tag: 'Tips', excerpt: 'Quality home improvements can transform your property and significantly boost its market value. Here are five upgrades that offer the best return on investment...', img: imagePools.kitchens[0] },
+      { id: 2, title: 'How to Choose the Right Wood for Your Joinery', author: 'Ed Bates', date: '28 Oct 2024', tag: 'Guide', img: imagePools.joinery[0] },
+      { id: 3, title: 'Our Latest Loft Conversion — Before & After', author: 'Ed Bates', date: '5 Oct 2024', tag: 'Project', img: imagePools['loft-conversions'][0] },
+      { id: 4, title: 'Bathroom Trends for 2025', author: 'Ed Bates', date: '18 Sep 2024', tag: 'Tips', img: imagePools.bathrooms[0] },
+    ];
+  }
 
-let testimonials = [
-  { id: 1, name: 'Sarah M.', location: 'Manchester', stars: 5, text: 'EB fitted our kitchen from scratch and the result is absolutely stunning. Every detail was perfect and the team were so professional throughout.' },
-  { id: 2, name: 'James T.', location: 'Salford', stars: 5, text: 'Our loft conversion is incredible — they turned a dusty attic into a proper bedroom and study. Finished on time and exactly to budget.' },
-  { id: 3, name: 'Claire W.', location: 'Stockport', stars: 5, text: 'Had our bathroom completely redone. The tiling is immaculate, the joinery is beautiful. Cleaned up perfectly every day. Highly recommend.' },
-  { id: 4, name: 'David R.', location: 'Altrincham', stars: 5, text: 'The built-in wardrobes have transformed our bedroom. Great use of space and exactly what we envisioned. Professional from first call to final finish.' },
-  { id: 5, name: 'Emma L.', location: 'Didsbury', stars: 5, text: 'The garden room has become our favourite space. Quality materials, beautifully crafted, and they finished on time and on budget.' },
-  { id: 6, name: 'Mark & Sue B.', location: 'Wilmslow', stars: 5, text: "Second time we've used EB — won't be the last. Staircase replacement this time. Absolutely beautiful. The whole house feels transformed." },
-];
+  // Rebuild Testimonials (with fetched data if available, else fallback)
+  if (!testimonials || testimonials.length === 0) {
+    testimonials = [
+      { id: 1, name: 'Sarah M.', location: 'Manchester', stars: 5, text: 'EB fitted our kitchen from scratch and the result is absolutely stunning. Every detail was perfect and the team were so professional throughout.' },
+      { id: 2, name: 'James T.', location: 'Salford', stars: 5, text: 'Our loft conversion is incredible — they turned a dusty attic into a proper bedroom and study. Finished on time and exactly to budget.' },
+      { id: 3, name: 'Claire W.', location: 'Stockport', stars: 5, text: 'Had our bathroom completely redone. The tiling is immaculate, the joinery is beautiful. Cleaned up perfectly every day. Highly recommend.' },
+      { id: 4, name: 'David R.', location: 'Altrincham', stars: 5, text: 'The built-in wardrobes have transformed our bedroom. Great use of space and exactly what we envisioned. Professional from first call to final finish.' },
+      { id: 5, name: 'Emma L.', location: 'Didsbury', stars: 5, text: 'The garden room has become our favourite space. Quality materials, beautifully crafted, and they finished on time and on budget.' },
+      { id: 6, name: 'Mark & Sue B.', location: 'Wilmslow', stars: 5, text: "Second time we've used EB — won't be the last. Staircase replacement this time. Absolutely beautiful. The whole house feels transformed." },
+    ];
+  }
+}
+
+// Initial build for immediate rendering of hardcoded items
+initDataObjects();
 
 
 
@@ -379,6 +394,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       fetch('data/posts.json').then(r => r.ok ? r.json() : null),
       fetch('data/image_manifest.json').then(r => r.ok ? r.json() : null)
     ]);
+
     if (revRes) testimonials = revRes;
     if (postRes) blogPosts = postRes;
 
@@ -387,19 +403,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       Object.keys(manifestRes).forEach(cat => {
         const manifestUrls = manifestRes[cat].map(img => img.url);
         if (imagePools[cat]) {
-          // Avoid duplicates if we already have some hardcoded ones
           imagePools[cat] = [...new Set([...imagePools[cat], ...manifestUrls])];
         } else {
           imagePools[cat] = manifestUrls;
         }
       });
     }
+
+    // REBUILD Data objects after merged manifest/remote posts
+    initDataObjects();
+
   } catch (err) {
     console.warn('Dynamic data load failed, using fallbacks');
   }
 
+  // Final Render
   renderHomePortfolio();
-  renderTestimonials();
+  renderReviews();
   renderBlog();
   renderPortfolio();
 
