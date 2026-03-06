@@ -74,8 +74,8 @@ nav {
 }
 
 .brand-logo {
-  aspect-ratio: 108 / 70;
-  width: 160px;
+  aspect-ratio: 790 / 158;
+  width: 220px;
   height: auto;
   object-fit: contain;
   mix-blend-mode: multiply;
@@ -567,6 +567,7 @@ section {
   position: relative;
   overflow: hidden;
   aspect-ratio: 4/3;
+  max-height: 320px;
   cursor: pointer;
   background: var(--grey-light);
   border-radius: var(--radius-sm);
@@ -1892,4 +1893,3 @@ footer {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
-

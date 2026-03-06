@@ -417,7 +417,10 @@ function showToast(msg) {
 ═══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', async () => {
   const path = window.location.pathname;
-  const page = path.split('/').pop() || 'index.html';
+  // Netlify serves pages at /services (no .html), but can also be /services.html
+  const pageFull = path.split('/').pop() || 'index.html';
+  // Strip extension for resilient matching
+  const page = pageFull.replace(/\.html$/, '') || 'index';
 
   // Load dynamic data silently — fallback to hardcoded if unavailable
   try {
@@ -451,29 +454,29 @@ document.addEventListener('DOMContentLoaded', async () => {
   initScrollAnimations();
 
   // Page-specific rendering — only runs what this page actually needs
-  if (page === 'index.html' || page === '') {
+  if (page === 'index' || page === '' || page === 'index.html') {
     initFeaturedHero();
     initServiceCarousels();
     renderHomePortfolio();
   }
 
-  if (page === 'portfolio.html') {
+  if (page === 'portfolio') {
     renderPortfolio();
   }
 
-  if (page === 'testimonials.html') {
+  if (page === 'testimonials') {
     renderReviews();
   }
 
-  if (page === 'blog.html') {
+  if (page === 'blog') {
     renderBlog();
   }
 
-  if (page === 'blog-post.html') {
+  if (page === 'blog-post') {
     initBlogPost();
   }
 
-  if (page === 'services.html') {
+  if (page === 'services') {
     initServiceCarousels();
   }
 });
