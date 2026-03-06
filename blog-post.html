@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | EB Joinery</title>
+    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <img src="https://res.cloudinary.com/die5rq3ua/image/upload/v1772713832/eb_joinery_navbar_txakzc.webp"
+                alt="EB Joinery Logo" class="brand-logo">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="testimonials.html">Testimonials</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+        </ul>
+        <div class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
+    </nav>
+
+    <main style="padding-top: 100px;">
+        <article id="blog-post-content" class="fade-up"
+            style="max-width: 800px; margin: 0 auto; padding: 2rem 4vw 6rem;">
+            <p style="text-align:center; color:rgba(255,255,255,0.4)">Loading post...</p>
+        </article>
+    </main>
+
+    <aside class="global-cta fade-up">
+        <h2>Ready to Start Your Project?</h2>
+        <p>Contact us today for a free design consultation and itemised quote. Let's build something brilliant together.
+        </p>
+        <a href="contact.html" class="btn-cta">Get Your Free Quote</a>
+    </aside>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand-name">EB<span>.</span>JOINERY</div>
+                <address
+                    style="font-style:normal; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;">
+                    Serving Widnes, Liverpool, Cheshire, Manchester & the Northwest<br>
+                    <a href="tel:07803676949" style="color:var(--accent); text-decoration:none;">07803676949</a>
+                </address>
+            </div>
+            <div>
+                <div class="footer-heading">Services</div>
+                <ul class="footer-links">
+                    <li><a href="services.html">Bespoke Fitted Kitchens</a></li>
+                    <li><a href="services.html">Loft & Home Conversions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div>© 2025 EB Joinery. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="main.js?v=8" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logic is handled in main.js via initBlogPost() if we add it
+            setTimeout(() => {
+                if (typeof initBlogPost === 'function') initBlogPost();
+            }, 500); // Wait for data fetch in main.js
+        });
+    </script>
+</body>
+
+</html>

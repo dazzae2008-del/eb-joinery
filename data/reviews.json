@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "name": "Sarah M.",
+        "location": "Manchester",
+        "stars": 5,
+        "text": "EB fitted our kitchen from scratch and the result is absolutely stunning. Every detail was perfect and the team were so professional throughout."
+    },
+    {
+        "id": 2,
+        "name": "James T.",
+        "location": "Salford",
+        "stars": 5,
+        "text": "Our loft conversion is incredible — they turned a dusty attic into a proper bedroom and study. Finished on time and exactly to budget."
+    },
+    {
+        "id": 3,
+        "name": "Claire W.",
+        "location": "Stockport",
+        "stars": 5,
+        "text": "Had our bathroom completely redone. The tiling is immaculate, the joinery is beautiful. Cleaned up perfectly every day. Highly recommend."
+    },
+    {
+        "id": 4,
+        "name": "David R.",
+        "location": "Altrincham",
+        "stars": 5,
+        "text": "The built-in wardrobes have transformed our bedroom. Great use of space and exactly what we envisioned. Professional from first call to final finish."
+    },
+    {
+        "id": 5,
+        "name": "Emma L.",
+        "location": "Didsbury",
+        "stars": 5,
+        "text": "The garden room has become our favourite space. Quality materials, beautifully crafted, and they finished on time and on budget."
+    },
+    {
+        "id": 6,
+        "name": "Mark & Sue B.",
+        "location": "Wilmslow",
+        "stars": 5,
+        "text": "Second time we've used EB — won't be the last. Staircase replacement this time. Absolutely beautiful. The whole house feels transformed."
+    }
+]

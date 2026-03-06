@@ -42,275 +42,7 @@
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap"></noscript>
   <link rel="stylesheet" href="style.css?v=8" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="style.css?v=8"></noscript>
-  <style>
-@font-face {
-  font-family: "Outfit-Fallback";
-  src: local("system-ui"), local("Arial");
-  size-adjust: 100%;
-}
-
-:root {
-  --black: #0f172a;
-  --white: #ffffff;
-  --grey-light: #f8fafc;
-  --grey-mid: #e2e8f0;
-  --grey-dark: #475569;
-  --accent: #0284c7;
-  --accent-dark: #0369a1;
-  --accent-light: #e0f2fe;
-  --font-display: 'Outfit', 'Outfit-Fallback', sans-serif;
-  --font-serif: 'DM Serif Display', serif;
-  --font-body: 'Outfit', 'Outfit-Fallback', sans-serif;
-  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
-  --radius-sm: 6px;
-  --radius-md: 12px;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-body);
-  background: var(--white);
-  color: var(--black);
-  overflow-x: hidden;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-/* ── NAV ── */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5vw;
-  height: 72px;
-  background: rgba(255, 255, 255, 0.90);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--grey-mid);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-}
-
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: 0.06em;
-  color: var(--black);
-  text-decoration: none;
-}
-
-.brand-logo {
-  aspect-ratio: 790 / 158;
-  width: 260px;
-  height: auto;
-  object-fit: contain;
-  mix-blend-mode: multiply;
-  filter: contrast(1.2) brightness(1.1);
-}
-
-.nav-logo span {
-  color: var(--accent);
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.6rem;
-  list-style: none;
-  align-items: center;
-}
-
-.nav-links a {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--grey-dark);
-  transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--accent);
-}
-
-.nav-cta {
-  background: var(--accent) !important;
-  color: var(--white) !important;
-  padding: 0.45rem 1.1rem;
-  min-width: 120px;
-  white-space: nowrap;
-}
-
-.nav-cta:hover {
-  background: var(--accent-dark) !important;
-}
-
-.nav-admin-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: var(--black);
-  color: var(--white) !important;
-  padding: 0.45rem 1rem;
-  font-size: 0.7rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.12em !important;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font-body);
-  text-transform: uppercase;
-  transition: background 0.2s;
-}
-
-.nav-admin-btn:hover {
-  background: #222 !important;
-  color: var(--white) !important;
-}
-
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 4px;
-}
-
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--black);
-  transition: all 0.3s;
-}
-
-/* ── PAGES ── */
-.page {
-  display: none;
-  padding-top: 72px;
-  min-height: 100vh;
-}
-
-.page.active {
-  display: block;
-}
-
-/* ── HERO ── */
-.hero {
-  min-height: 100svh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-left {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 6vw 5vw 6vw 8vw;
-  position: relative;
-  z-index: 2;
-}
-
-.hero-eyebrow {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.hero-eyebrow::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 2px;
-  background: var(--accent);
-}
-
-.hero h1 {
-  font-family: var(--font-display);
-  font-size: clamp(3.2rem, 5.5vw, 5.5rem);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin-bottom: 2rem;
-}
-
-.hero h1 em {
-  font-family: var(--font-serif);
-  font-style: italic;
-  color: var(--accent);
-}
-
-.hero-desc {
-  font-size: 1rem;
-  font-weight: 300;
-  color: var(--grey-dark);
-  max-width: 400px;
-  line-height: 1.8;
-  margin-bottom: 3rem;
-}
-
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.hero-stats {
-  display: flex;
-  gap: 3rem;
-  margin-top: 4rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--grey-mid);
-  min-height: 60px;
-  align-items: center;
-}
-
-.stat-num {
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  color: var(--accent);
-}
-
-.stat-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--grey-dark);
-}
-
-.hero-right {
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-img-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-
-  </style>
+  
 
   <meta property="og:title" content="Joinery Services Widnes | Expert Joiners & Builders | EB Joinery" />
   <meta property="og:description" content="Expert joinery & home improvement services across Widnes, Liverpool & Cheshire. Quality craftsmanship, competitive prices. Call EB Joinery today for a free quote." />
@@ -322,18 +54,18 @@ nav {
 <body>
 
   <nav>
-    <a href="#home" class="nav-logo" onclick="showPage('home');return false"
+    <a href="index.html" class="nav-logo" 
       style="display: flex; align-items: center; gap: 8px;">
       <img src="https://res.cloudinary.com/die5rq3ua/image/upload/v1772713832/eb_joinery_navbar_txakzc.webp" alt="EB Joinery Logo" class="brand-logo">
     </a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#home" onclick="showPage('home');return false" data-page="home" class="active">Home</a></li>
-      <li><a href="portfolio.html" onclick="showPage('portfolio');return false" data-page="portfolio">Portfolio</a></li>
-      <li><a href="#services" onclick="showPage('services');return false" data-page="services">Services</a></li>
-      <li><a href="#about" onclick="showPage('about');return false" data-page="about">About</a></li>
-      <li><a href="#testimonials" onclick="showPage('testimonials');return false" data-page="testimonials">Testimonials</a></li>
-      <li><a href="#blog" onclick="showPage('blog');return false" data-page="blog">Blog</a></li>
-      <li><a href="#contact" onclick="showPage('contact');return false" class="nav-cta" data-page="contact">Get a Quote</a>
+      <li><a href="index.html"  data-page="home" class="active">Home</a></li>
+      <li><a href="portfolio.html"  data-page="portfolio">Portfolio</a></li>
+      <li><a href="services.html"  data-page="services">Services</a></li>
+      <li><a href="about.html"  data-page="about">About</a></li>
+      <li><a href="testimonials.html"  data-page="testimonials">Testimonials</a></li>
+      <li><a href="blog.html"  data-page="blog">Blog</a></li>
+      <li><a href="contact.html"  class="nav-cta" data-page="contact">Get a Quote</a>
       </li>
       <li><a href="/admin.html" class="nav-admin-btn" style="text-decoration:none">⚙ Admin</a></li>
     </ul>
@@ -342,13 +74,13 @@ nav {
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#" onclick="showPage('home');toggleMobile();return false">Home</a>
-    <a href="#" onclick="showPage('portfolio');toggleMobile();return false">Portfolio</a>
-    <a href="#" onclick="showPage('services');toggleMobile();return false">Services</a>
-    <a href="#" onclick="showPage('about');toggleMobile();return false">About</a>
-    <a href="#" onclick="showPage('testimonials');toggleMobile();return false">Testimonials</a>
-    <a href="#" onclick="showPage('blog');toggleMobile();return false">Blog</a>
-    <a href="#" onclick="showPage('contact');toggleMobile();return false">Get a Quote</a>
+    <a href="#" onclick="toggleMobile()">Home</a>
+    <a href="#" onclick="toggleMobile()">Portfolio</a>
+    <a href="#" onclick="toggleMobile()">Services</a>
+    <a href="#" onclick="toggleMobile()">About</a>
+    <a href="#" onclick="toggleMobile()">Testimonials</a>
+    <a href="#" onclick="toggleMobile()">Blog</a>
+    <a href="#" onclick="toggleMobile()">Get a Quote</a>
     <a href="/admin.html">⚙ Admin</a>
   </div>
   <main>
@@ -363,8 +95,8 @@ nav {
         <h1 style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1;">Bespoke <em>Joinery</em> Services<br>in Widnes</h1>
         <p class="hero-desc">Your trusted local joiners in Widnes. We specialize in bespoke fitted furniture, custom staircases, kitchen fitting, and complete home renovations tailored to your property.</p>
         <div class="hero-actions">
-          <a class="btn-primary" href="portfolio.html" onclick="showPage('portfolio');return false">View Our Work</a>
-          <a class="btn-outline" href="#contact" onclick="showPage('contact');return false">Free Quote</a>
+          <a class="btn-primary" href="portfolio.html" >View Our Work</a>
+          <a class="btn-outline" href="contact.html" >Free Quote</a>
         </div>
         <div class="hero-stats">
           <div>
@@ -420,41 +152,41 @@ nav {
       <p class="section-subtitle">End-to-end home improvements from structural building work to bespoke fitted
         furniture. Every trade, one trusted team serving Merseyside and Cheshire.</p>
       <div class="services-grid">
-        <div class="service-card" onclick="showPage('services');return false">
+        <div class="service-card" >
           <div class="service-number">01</div>
           <div class="service-name">Fitted Kitchens</div>
           <p class="service-desc">Custom-designed fitted kitchens built to maximise your space and reflect your style,
-            precision-fitted from scratch.</p><a href="#services" class="service-link" onclick="showPage('services');return false">Learn More →</a>
+            precision-fitted from scratch.</p><a href="services.html" class="service-link" >Learn More →</a>
         </div>
-        <div class="service-card" onclick="showPage('services');return false">
+        <div class="service-card" >
           <div class="service-number">02</div>
           <div class="service-name">Loft Conversions</div>
           <p class="service-desc">Turn wasted roof space into a stunning bedroom, office or living area. Full structural
-            work to final fit-out.</p><a href="#services" class="service-link" onclick="showPage('services');return false">Learn More →</a>
+            work to final fit-out.</p><a href="services.html" class="service-link" >Learn More →</a>
         </div>
-        <div class="service-card" onclick="showPage('services');return false">
+        <div class="service-card" >
           <div class="service-number">03</div>
           <div class="service-name">Bathroom Fitting</div>
           <p class="service-desc">Complete bathroom design and installation — tiling, plumbing, joinery and finishing to
-            the highest standard.</p><a href="#services" class="service-link" onclick="showPage('services');return false">Learn More →</a>
+            the highest standard.</p><a href="services.html" class="service-link" >Learn More →</a>
         </div>
-        <div class="service-card" onclick="showPage('services');return false">
+        <div class="service-card" >
           <div class="service-number">04</div>
           <div class="service-name">Staircases & Joinery</div>
           <p class="service-desc">Bespoke staircases, doors, windows, skirting and all joinery work — crafted from
-            premium hardwoods and softwoods.</p><a href="#services" class="service-link" onclick="showPage('services');return false">Learn More →</a>
+            premium hardwoods and softwoods.</p><a href="services.html" class="service-link" >Learn More →</a>
         </div>
-        <div class="service-card" onclick="showPage('services');return false">
+        <div class="service-card" >
           <div class="service-number">05</div>
           <div class="service-name">Extensions</div>
           <p class="service-desc">Single and double-storey extensions that add real living space and lasting value to
-            your property.</p><a href="#services" class="service-link" onclick="showPage('services');return false">Learn More →</a>
+            your property.</p><a href="services.html" class="service-link" >Learn More →</a>
         </div>
-        <div class="service-card" onclick="showPage('services');return false">
+        <div class="service-card" >
           <div class="service-number">06</div>
           <div class="service-name">Decking & Garden Rooms</div>
           <p class="service-desc">Bespoke outdoor living spaces — hardwood decking, pergolas, and fully insulated garden
-            rooms.</p><a href="#services" class="service-link" onclick="showPage('services');return false">Learn More →</a>
+            rooms.</p><a href="services.html" class="service-link" >Learn More →</a>
         </div>
       </div>
     </section>
@@ -465,7 +197,7 @@ nav {
       <h2 class="section-title">Latest <em>Projects</em></h2>
       <div class="portfolio-grid" id="home-portfolio-grid"></div>
       <div style="text-align:center;margin-top:3rem"><a class="btn-outline"
-          href="portfolio.html" onclick="showPage('portfolio');return false">View All Projects</a></div>
+          href="portfolio.html" >View All Projects</a></div>
     </section>
 
     <!-- CTA -->
@@ -480,9 +212,9 @@ nav {
         </div>
       </div>
       <div style="display:flex;flex-direction:column;gap:1rem">
-        <a class="btn-primary" href="#contact" onclick="showPage('contact');return false"
+        <a class="btn-primary" href="contact.html" 
           style="background:white;color:var(--accent);white-space:nowrap">Get a Free Quote</a>
-        <a class="btn-outline" href="portfolio.html" onclick="showPage('portfolio');return false"
+        <a class="btn-outline" href="portfolio.html" 
           style="border-color:rgba(255,255,255,0.4);color:white;white-space:nowrap">See Our Work</a>
       </div>
     </div>
@@ -491,42 +223,7 @@ nav {
   <!-- ══════════════════════════
      PORTFOLIO
 ══════════════════════════ -->
-  <div class="page" id="page-portfolio">
-    <section>
-      <div class="section-label">Our Portfolio</div>
-      <div class="section-title">Project <em>Gallery</em></div>
-      <p class="section-subtitle">Browse completed projects across every trade. Each one a testament to quality
-        craftsmanship and attention to detail.</p>
-      <div class="portfolio-filter" id="portfolio-filter">
-        <button class="filter-btn active" onclick="filterPortfolio('all',this)">All Projects</button>
-        <button class="filter-btn" onclick="filterPortfolio('kitchens',this)">Kitchens</button>
-        <button class="filter-btn" onclick="filterPortfolio('loft-conversions',this)">Loft Conversions</button>
-        <button class="filter-btn" onclick="filterPortfolio('bathrooms',this)">Bathrooms</button>
-        <button class="filter-btn" onclick="filterPortfolio('staircases',this)">Staircases</button>
-        <button class="filter-btn" onclick="filterPortfolio('extensions',this)">Extensions</button>
-        <button class="filter-btn" onclick="filterPortfolio('joinery',this)">Joinery</button>
-        <button class="filter-btn" onclick="filterPortfolio('outdoor',this)">Outdoor</button>
-      </div>
-      <div class="portfolio-grid" id="main-portfolio-grid"></div>
-    </section>
   </div>
-
-  <!-- ══════════════════════════
-     SERVICES
-══════════════════════════ -->
-  <div class="page" id="page-services">
-    <section>
-      <div class="section-label">Services</div>
-      <div class="section-title">What We <em>Offer</em></div>
-      <p class="section-subtitle">Complete home improvement from foundations to finishing touches. All trades in one
-        trusted team.</p>
-    </section>
-    <div class="svc-outer">
-      <div style="display:grid;gap:3px;background:var(--grey-mid)">
-        <div class="svc-row">
-          <div class="svc-photo-panel">
-            <div class="service-carousel" data-pool="kitchens"></div>
-          </div>
           <div class="svc-text-panel">
             <div class="section-label">01</div>
             <div style="font-family:var(--font-display);font-size:2.2rem;margin-bottom:1rem">Fitted Kitchens</div>
@@ -549,7 +246,7 @@ nav {
               <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
                   style="color:var(--accent)">✓</span>Full installation & finishing</li>
             </ul>
-            <a class="btn-primary" href="#contact" onclick="showPage('contact');return false">Get a Kitchen Quote</a>
+            <a class="btn-primary" href="contact.html" >Get a Kitchen Quote</a>
           </div>
         </div>
         <div class="svc-row">
@@ -575,7 +272,7 @@ nav {
               <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
                   style="color:var(--accent)">✓</span>Full fit-out to decoration stage</li>
             </ul>
-            <a class="btn-primary" href="#contact" onclick="showPage('contact');return false">Get a Loft Quote</a>
+            <a class="btn-primary" href="contact.html" >Get a Loft Quote</a>
           </div>
           <div class="svc-photo-panel">
             <div class="service-carousel" data-pool="loft"></div>
@@ -607,7 +304,7 @@ nav {
               <li style="padding:0.4rem 0;font-size:0.85rem;color:var(--grey-dark);display:flex;gap:0.7rem"><span
                   style="color:var(--accent)">✓</span>Wet rooms & accessible bathrooms</li>
             </ul>
-            <a class="btn-primary" href="#contact" onclick="showPage('contact');return false">Get a Bathroom Quote</a>
+            <a class="btn-primary" href="contact.html" >Get a Bathroom Quote</a>
           </div>
         </div>
       </div>
@@ -648,13 +345,7 @@ nav {
   <!-- ══════════════════════════
      ABOUT
 ══════════════════════════ -->
-  <div class="page" id="page-about">
-    <section>
-      <div class="about-grid">
-        <div class="about-img">
-          <img src="https://res.cloudinary.com/die5rq3ua/image/upload/v1772657457/473387678_1775541639865965_5052939221261178285_n_bl4ecx.webp" alt="EB Joinery craftsman" loading="lazy" width="600" height="480" style="width:100%; height:100%; object-fit:cover; border-radius:12px;" class="about-img-main">
-          <div class="about-badge"><span class="num">12</span><span class="lbl">Years</span></div>
-        </div>
+  </div>
         <div>
           <div class="section-label">About EB Joinery</div>
           <div class="section-title">Built on <em>Craft</em></div>
@@ -686,7 +377,7 @@ nav {
                 Rating</div>
             </div>
           </div>
-          <a class="btn-primary" href="#contact" onclick="showPage('contact');return false" style="margin-right:1rem">Work With Us</a>
+          <a class="btn-primary" href="contact.html"  style="margin-right:1rem">Work With Us</a>
           <a class="btn-outline" href="https://www.facebook.com/p/EB-Joinery-100032892682664/"
             target="_blank">Facebook</a>
         </div>
@@ -727,21 +418,7 @@ nav {
   <!-- ══════════════════════════
      TESTIMONIALS
 ══════════════════════════ -->
-  <div class="page" id="page-testimonials">
-    <section style="background:var(--grey-light)">
-      <div class="section-label">Client Reviews</div>
-      <div class="section-title">What Clients <em>Say</em></div>
-      <p class="section-subtitle">Honest words from real clients about their experience with EB Joinery.</p>
-      <div class="testimonials-grid" id="testimonials-grid"></div>
-    </section>
-    <div
-      style="background:var(--accent);padding:4rem 8vw;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;text-align:center">
-      <div>
-        <div style="font-family:var(--font-display);font-size:4rem;color:white;line-height:1">5.0</div>
-        <div
-          style="color:rgba(255,255,255,0.75);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;margin-top:0.3rem">
-          Average Rating</div>
-      </div>
+  </div>
       <div>
         <div style="font-family:var(--font-display);font-size:4rem;color:white;line-height:1">150+</div>
         <div
@@ -766,32 +443,7 @@ nav {
   <!-- ══════════════════════════
      BLOG
 ══════════════════════════ -->
-  <div class="page" id="page-blog">
-    <section>
-      <div class="section-label">News & Tips</div>
-      <div class="section-title">The <em>Blog</em></div>
-      <p class="section-subtitle">Home improvement tips, project updates and inspiration for your next renovation.</p>
-      <div class="blog-grid" id="blog-main"></div>
-    </section>
   </div>
-
-  <!-- ══════════════════════════
-     CONTACT
-══════════════════════════ -->
-  <div class="page" id="page-contact">
-    <section>
-      <div class="section-label">Get In Touch</div>
-      <div class="section-title">Start Your <em>Project</em></div>
-      <p class="section-subtitle">Ready to transform your home? Get in touch for a free, no-obligation quote. We
-        typically respond within 24 hours.</p>
-      <div class="contact-grid">
-        <div>
-          <div class="contact-detail">
-            <div class="contact-icon">📞</div>
-            <div>
-              <div class="contact-label">Phone</div>
-              <div class="contact-value">07803676949</div>
-            </div>
           </div>
           <div class="contact-detail">
             <div class="contact-icon">✉️</div>
@@ -861,6 +513,12 @@ nav {
      FOOTER
 ══════════════════════════ -->
   </main>
+
+  <aside class="global-cta fade-up">
+    <h2>Ready to Start Your Project?</h2>
+    <p>Contact us today for a free design consultation and itemised quote. Let's build something brilliant together.</p>
+    <a href="contact.html" class="btn-cta">Get Your Free Quote</a>
+  </aside>
   <footer>
     <div class="footer-grid">
       <div>
@@ -879,12 +537,12 @@ nav {
       <div>
         <div class="footer-heading">Services</div>
         <ul class="footer-links">
-          <li><a href="#services" onclick="showPage('services');return false">Bespoke Fitted Kitchens</a></li>
-          <li><a href="#services" onclick="showPage('services');return false">Loft & Home Conversions</a></li>
-          <li><a href="#services" onclick="showPage('services');return false">Bathroom Fitting Services</a></li>
-          <li><a href="#services" onclick="showPage('services');return false">Staircase Joinery</a></li>
-          <li><a href="#services" onclick="showPage('services');return false">House Extensions</a></li>
-          <li><a href="#services" onclick="showPage('services');return false">Decking & Wooden Flooring</a></li>
+          <li><a href="services.html" >Bespoke Fitted Kitchens</a></li>
+          <li><a href="services.html" >Loft & Home Conversions</a></li>
+          <li><a href="services.html" >Bathroom Fitting Services</a></li>
+          <li><a href="services.html" >Staircase Joinery</a></li>
+          <li><a href="services.html" >House Extensions</a></li>
+          <li><a href="services.html" >Decking & Wooden Flooring</a></li>
         </ul>
       </div>
       <div>
@@ -894,13 +552,13 @@ nav {
           <li><a href="/joinery-services-widnes.html">Joinery Widnes</a></li>
           <li><a href="/home-improvements-liverpool.html">Liverpool Builders</a></li>
           <li><a href="/bespoke-joinery-cheshire.html">Cheshire Joinery</a></li>
-          <li><a href="#about" onclick="showPage('about');return false">About EB Joinery</a></li>
+          <li><a href="about.html" >About EB Joinery</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-heading">Contact</div>
         <ul class="footer-links">
-          <li><a href="#contact" onclick="showPage('contact');return false">Get a Quote</a></li>
+          <li><a href="contact.html" >Get a Quote</a></li>
           <li><a href="tel:07803676949">Call Us</a></li>
           <li><a href="/cdn-cgi/l/email-protection#87e2e3c7e2e5ede8eee9e2f5fea9e4e8a9f2ec">Email Us</a></li>
           <li><a href="https://www.facebook.com/p/EB-Joinery-100032892682664/" target="_blank">Facebook</a></li>
@@ -913,23 +571,7 @@ nav {
     </div>
   </footer>
 
-  <!-- ══════════════════════════
-     LOGIN MODAL
-══════════════════════════ -->
-  <div class="modal-overlay" id="login-modal">
-    <div class="login-box">
-      <button class="login-close" onclick="closeLogin()">✕</button>
-      <div class="login-logo">EB<span>.</span>ADMIN</div>
-      <div class="login-sub">Content Management</div>
-      <label class="login-label">Username</label>
-      <input class="login-input" type="text" id="login-user" placeholder="Username" autocomplete="username">
-      <label class="login-label">Password</label>
-      <input class="login-input" type="password" id="login-pass" placeholder="Password" autocomplete="current-password"
-        onkeydown="if(event.key==='Enter')doLogin()">
-      <div class="login-er        <div style="margin-top:2rem">
-          <div class="admin-section-title">EXISTING TESTIMONIALS</div>
-          <div id="test-list-admin" style="display:flex;flex-direction:column;gap:0.4rem"></div>
-        </div>
+  
       </div>
 
     </div><!-- end admin-panel-box -->

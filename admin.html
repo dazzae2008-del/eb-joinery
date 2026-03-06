@@ -42,7 +42,30 @@
 
 <body>
 
-<!-- ══════════════════════════
+
+  <!-- ══════════════════════════
+     LOGIN MODAL
+══════════════════════════ -->
+  <div class="modal-overlay open" id="login-modal">
+    <div class="login-box">
+      <div class="login-logo">EB<span>.</span>ADMIN</div>
+      <div class="login-sub">Content Management</div>
+      <label class="login-label">Username</label>
+      <input class="login-input" type="text" id="login-user" placeholder="Username" autocomplete="username">
+      <label class="login-label">Password</label>
+      <input class="login-input" type="password" id="login-pass" placeholder="Password" autocomplete="current-password"
+        onkeydown="if(event.key==='Enter')doLogin()">
+      <div class="login-error" id="login-error"
+        style="display:none;color:#ff6b6b;font-size:0.8rem;margin-bottom:0.5rem">Incorrect username or password</div>
+      <button class="admin-btn full" id="login-btn">Login</button>
+      <a href="index.html"
+        style="display:block; text-align:center; margin-top:1rem; color:var(--grey-dark); font-size:0.85rem; text-decoration:none;">←
+        Back to Site</a>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════
      ADMIN PANEL MODAL
 ══════════════════════════ -->
   <div class="modal-overlay" id="admin-modal">
@@ -167,7 +190,22 @@
 
       <!-- ── TAB: TESTIMONIALS ── -->
       <div class="admin-tab-content" id="tab-testimonials">
-        <div class="admin-section-title">ADD A CLIENT TESTIMONIAL</div>
+        <div class="admin-section-title">SEND REVIEW REQUEST TO CLIENT</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1.5rem">
+          <div><label class="admin-label">Client Name</label><input class="admin-input" id="req-name"
+              placeholder="e.g. Sarah M."></div>
+          <div><label class="admin-label">Client Email</label><input class="admin-input" id="req-email"
+              placeholder="e.g. sarah@example.com"></div>
+          <button class="admin-btn full" onclick="sendReviewRequest()" style="grid-column: span 2;">✉ Send Request via
+            Email</button>
+        </div>
+
+        <div class="admin-section-title">PENDING REVIEWS</div>
+        <div id="pending-reviews-list" style="margin-bottom:1.5rem">
+          <p style="font-size:0.8rem;color:rgba(255,255,255,0.4)">Fetching pending reviews...</p>
+        </div>
+
+        <div class="admin-section-title">ADD A CLIENT TESTIMONIAL MANUALLY</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem">
           <div><label class="admin-label">Client Name</label><input class="admin-input" id="test-name"
               placeholder="Sarah M."></div>
@@ -196,5 +234,7 @@
 
 
   <script src="main.js?v=8" defer></script>
+  <script src="admin.js" defer></script>
 </body>
+
 </html>

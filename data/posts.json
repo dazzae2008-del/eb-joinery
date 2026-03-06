@@ -1,0 +1,36 @@
+[
+    {
+        "id": 1,
+        "featured": true,
+        "title": "5 Ways to Add Value to Your Home",
+        "author": "Ed Bates",
+        "date": "12 Nov 2024",
+        "tag": "Tips",
+        "excerpt": "Quality home improvements can transform your property and significantly boost its market value. Here are five upgrades that offer the best return on investment...",
+        "img": "https://res.cloudinary.com/die5rq3ua/image/upload/v1772657462/473543467_1775541593199303_6408288811264688599_n_yvgu8e.webp"
+    },
+    {
+        "id": 2,
+        "title": "How to Choose the Right Wood for Your Joinery",
+        "author": "Ed Bates",
+        "date": "28 Oct 2024",
+        "tag": "Guide",
+        "img": "https://res.cloudinary.com/die5rq3ua/image/upload/v1772657391/51392657_393343424752467_5522727944314683392_n_wwal9n.webp"
+    },
+    {
+        "id": 3,
+        "title": "Our Latest Loft Conversion — Before & After",
+        "author": "Ed Bates",
+        "date": "5 Oct 2024",
+        "tag": "Project",
+        "img": "https://res.cloudinary.com/die5rq3ua/image/upload/v1772657435/72456738_536253213794820_6565817282507833344_n_wblrzn.webp"
+    },
+    {
+        "id": 4,
+        "title": "Bathroom Trends for 2025",
+        "author": "Ed Bates",
+        "date": "18 Sep 2024",
+        "tag": "Tips",
+        "img": "https://res.cloudinary.com/die5rq3ua/image/upload/v1772657442/76695094_570509973702477_6500467765961293824_n_soetm5.webp"
+    }
+]

@@ -1,0 +1,27 @@
+{
+  "name": "eb_joinery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dazzae2008-del/eb-joinery.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/dazzae2008-del/eb-joinery/issues"
+  },
+  "homepage": "https://github.com/dazzae2008-del/eb-joinery#readme",
+  "dependencies": {
+    "@octokit/rest": "^22.0.1",
+    "cloudinary": "^2.9.0",
+    "resend": "^6.9.3",
+    "sharp": "^0.34.5"
+  }
+}

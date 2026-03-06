@@ -1,18 +1,14 @@
 /* ═══════════════════════════════════════
    CONFIG
 ═══════════════════════════════════════ */
-const ADMIN_USER = 'EdBates';
-const ADMIN_PASS = 'J01nery1!';
-let isLoggedIn = false;
-
 const catMeta = {
-  kitchens:           { label: 'Fitted Kitchens',   icon: '🍳' },
-  'loft-conversions': { label: 'Loft Conversions',  icon: '🏗️' },
-  bathrooms:          { label: 'Bathrooms',          icon: '🛁' },
-  staircases:         { label: 'Staircases',         icon: '🪜' },
-  extensions:         { label: 'Extensions',         icon: '🏠' },
-  joinery:            { label: 'Joinery',            icon: '🚪' },
-  outdoor:            { label: 'Outdoor / Decking',  icon: '🌿' },
+  kitchens: { label: 'Fitted Kitchens', icon: '🍳' },
+  'loft-conversions': { label: 'Loft Conversions', icon: '🏗️' },
+  bathrooms: { label: 'Bathrooms', icon: '🛁' },
+  staircases: { label: 'Staircases', icon: '🪜' },
+  extensions: { label: 'Extensions', icon: '🏠' },
+  joinery: { label: 'Joinery', icon: '🚪' },
+  outdoor: { label: 'Outdoor / Decking', icon: '🌿' },
 };
 
 /* ═══════════════════════════════════════
@@ -118,7 +114,7 @@ function shuffle(arr) {
 function initFeaturedHero() {
   const picks = shuffle(allImages).slice(0, 3);
   document.querySelectorAll('.hero-img-cell img').forEach((img, i) => {
-    if (picks[i]) img.src = picks[i];
+    if (picks[i]) img.src = getOptimizedUrl(picks[i], 1200);
   });
 }
 
@@ -149,14 +145,14 @@ function initServiceCarousels() {
         img.loading = 'lazy';
         img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 0.9s ease;';
       });
-      imgA.src = deck[deckIdx++ % deck.length]; imgA.style.opacity = '1';
-      imgB.src = deck[deckIdx++ % deck.length]; imgB.style.opacity = '0';
+      imgA.src = getOptimizedUrl(deck[deckIdx++ % deck.length], 800); imgA.style.opacity = '1';
+      imgB.src = getOptimizedUrl(deck[deckIdx++ % deck.length], 800); imgB.style.opacity = '0';
       carousel.appendChild(imgA);
       carousel.appendChild(imgB);
 
       let showingA = true;
       setInterval(() => {
-        const nextSrc = deck[deckIdx++ % deck.length];
+        const nextSrc = getOptimizedUrl(deck[deckIdx++ % deck.length], 800);
         if (showingA) {
           imgB.src = nextSrc; imgB.style.opacity = '1'; imgA.style.opacity = '0';
         } else {
@@ -171,7 +167,7 @@ function initServiceCarousels() {
 
       const deck = shuffle([...pool]);
       carousel.innerHTML = deck.slice(0, 3).map(src =>
-        `<img src="${src}" alt="EB Joinery work" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">`
+        `<img src="${getOptimizedUrl(src, 800)}" alt="EB Joinery work" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">`
       ).join('');
 
       let deckIdx = 3;
@@ -184,9 +180,9 @@ function initServiceCarousels() {
           deckIdx = 0;
         }
         const nextSrc = deck[deckIdx++];
-        const visible = [...imgs].map(i => i.src);
-        if (!visible.some(s => s.includes(nextSrc.split('/').pop()))) {
-          imgs[slotIdx % imgs.length].src = nextSrc;
+        const visibleNames = [...imgs].map(i => i.src.split('/').pop().split('?')[0]);
+        if (!visibleNames.some(s => nextSrc.includes(s))) {
+          imgs[slotIdx % imgs.length].src = getOptimizedUrl(nextSrc, 800);
         }
         slotIdx = (slotIdx + 1) % imgs.length;
       }, 3000);
@@ -234,23 +230,7 @@ let testimonials = [
   { id: 6, name: 'Mark & Sue B.', location: 'Wilmslow', stars: 5, text: "Second time we've used EB — won't be the last. Staircase replacement this time. Absolutely beautiful. The whole house feels transformed." },
 ];
 
-/* ═══════════════════════════════════════
-   PAGE NAVIGATION
-═══════════════════════════════════════ */
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const target = document.getElementById('page-' + name);
-  if (target) target.classList.add('active');
-  document.querySelectorAll('.nav-links a[data-page]').forEach(a => {
-    a.classList.toggle('active', a.dataset.page === name);
-  });
-  window.scrollTo(0, 0);
-  if (name === 'home') renderHomePortfolio();
-  if (name === 'portfolio') renderPortfolio();
-  if (name === 'testimonials') renderTestimonials();
-  if (name === 'blog') renderBlog();
-  return false;
-}
+
 
 function toggleMobile() {
   const m = document.getElementById('mobile-menu');
@@ -262,13 +242,28 @@ function toggleMobile() {
 ═══════════════════════════════════════ */
 let currentFilter = 'all';
 
-function renderPortfolioGrid(containerId, items, limit) {
-  const c = document.getElementById(containerId);
+function renderPortfolio() {
+  const grid = document.getElementById('main-portfolio-grid');
+  if (!grid) return;
+  const filtered = currentFilter === 'all' ? portfolioItems : portfolioItems.filter(i => i.category === currentFilter);
+  grid.innerHTML = filtered.map(p => `
+      <div class="portfolio-card filter-item ${p.category}">
+        <img src="${getOptimizedUrl(p.img, 800)}" alt="${p.title}" loading="lazy">
+        <div class="portfolio-overlay">
+          <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">${catMeta[p.category]?.label || p.category}</div>
+          <div style="font-family:var(--font-display); font-size:1.3rem;">${p.title}</div>
+        </div>
+      </div>
+    `).join('');
+}
+
+function renderHomePortfolio() {
+  const c = document.getElementById('home-portfolio-grid');
   if (!c) return;
-  const list = limit ? items.slice(0, limit) : items;
+  const list = shuffle(portfolioItems).slice(0, 6);
   c.innerHTML = list.map(item => `
     <div class="portfolio-item${item.large ? ' large' : ''}" data-cat="${item.category}">
-      <img src="${item.img}" alt="${item.title}" loading="lazy" width="600" height="400">
+      <img src="${getOptimizedUrl(item.img, 600)}" alt="${item.title}" loading="lazy" width="600" height="400">
       <div class="portfolio-overlay">
         <div class="portfolio-cat">${catMeta[item.category]?.label || item.category}</div>
         <div class="portfolio-title">${item.title}</div>
@@ -277,13 +272,6 @@ function renderPortfolioGrid(containerId, items, limit) {
   `).join('');
 }
 
-function renderHomePortfolio() {
-  renderPortfolioGrid('home-portfolio-grid', shuffle(portfolioItems), 6);
-}
-function renderPortfolio() {
-  const filtered = currentFilter === 'all' ? portfolioItems : portfolioItems.filter(i => i.category === currentFilter);
-  renderPortfolioGrid('main-portfolio-grid', filtered);
-}
 function filterPortfolio(cat, btn) {
   currentFilter = cat;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -294,50 +282,22 @@ function filterPortfolio(cat, btn) {
 /* ═══════════════════════════════════════
    TESTIMONIALS
 ═══════════════════════════════════════ */
-function renderTestimonials() {
-  const g = document.getElementById('testimonials-grid');
-  if (!g) return;
-  g.innerHTML = testimonials.map(t => `
-    <div class="testimonial-card">
-      <div class="testimonial-stars">${'★'.repeat(t.stars)}${'☆'.repeat(5 - t.stars)}</div>
-      <div class="testimonial-text">"${t.text}"</div>
-      <div class="testimonial-author">
-        <div class="author-avatar">👤</div>
-        <div><div class="author-name">${t.name}</div><div class="author-location">${t.location}</div></div>
+function renderReviews() {
+  const grid = document.getElementById('testimonials-grid');
+  if (!grid) return;
+  grid.innerHTML = testimonials.map(t => `
+      <div class="testimonial-card">
+        <div class="testimonial-stars">${'★'.repeat(t.stars)}${'☆'.repeat(5 - t.stars)}</div>
+        <p class="testimonial-text">"${t.text}"</p>
+        <div class="testimonial-meta">
+          <img src="https://api.dicebear.com/7.x/initials/svg?seed=${t.name}" alt="${t.name}">
+          <div>
+            <div class="testimonial-name">${t.name}</div>
+            <div class="testimonial-loc">${t.location}</div>
+          </div>
+        </div>
       </div>
-    </div>
-  `).join('');
-}
-
-function addTestimonial() {
-  const name = document.getElementById('test-name')?.value.trim();
-  const location = document.getElementById('test-location')?.value.trim();
-  const text = document.getElementById('test-text')?.value.trim();
-  const stars = parseInt(document.getElementById('test-stars')?.value || 5);
-  if (!name || !text) { showToast('Please add name and testimonial text'); return; }
-  testimonials.unshift({ id: Date.now(), name, location: location || 'Local', stars, text });
-  ['test-name', 'test-location', 'test-text'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  renderTestimonials();
-  refreshTestAdmin();
-  showToast('✓ Testimonial added!');
-}
-
-function refreshTestAdmin() {
-  const el = document.getElementById('test-list-admin');
-  if (!el) return;
-  el.innerHTML = testimonials.map(t => `
-    <div style="background:rgba(255,255,255,0.04);padding:0.6rem 0.8rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:0.8rem;color:rgba(255,255,255,0.6)">
-      <div><strong style="color:rgba(255,255,255,0.85)">${t.name}</strong> — ${'★'.repeat(t.stars)}</div>
-      <button class="del-btn" onclick="deleteTestimonial(${t.id})">🗑</button>
-    </div>
-  `).join('');
-}
-
-function deleteTestimonial(id) {
-  testimonials = testimonials.filter(t => t.id !== id);
-  renderTestimonials();
-  refreshTestAdmin();
-  showToast('Testimonial removed');
+    `).join('');
 }
 
 /* ═══════════════════════════════════════
@@ -351,223 +311,31 @@ function renderBlog() {
   c.innerHTML = `
     <div class="blog-featured">
       <div class="blog-featured-img">
-        <img src="${featured.img}" style="width:100%;height:100%;object-fit:cover" alt="${featured.title}" loading="lazy">
+        <a href="blog-post.html?id=${featured.id}">
+          <img src="${getOptimizedUrl(featured.img, 1200)}" style="width:100%;height:100%;object-fit:cover" alt="${featured.title}" loading="lazy">
+        </a>
       </div>
       <div class="blog-tag">${featured.tag}</div>
-      <div class="blog-title-link">${featured.title}</div>
+      <a href="blog-post.html?id=${featured.id}" class="blog-title-link">${featured.title}</a>
       <div class="blog-meta">${featured.date} · By ${featured.author}</div>
       <p class="blog-excerpt">${featured.excerpt || ''}</p>
     </div>
     <div class="blog-list">
       ${rest.map(p => `
         <div class="blog-mini">
-          <div class="blog-mini-img"><img src="${p.img}" alt="${p.title}" width="76" height="68" loading="lazy"></div>
+          <div class="blog-mini-img">
+            <a href="blog-post.html?id=${p.id}">
+              <img src="${getOptimizedUrl(p.img, 76)}" alt="${p.title}" width="76" height="68" loading="lazy">
+            </a>
+          </div>
           <div>
-            <div class="blog-mini-title">${p.title}</div>
+            <a href="blog-post.html?id=${p.id}" class="blog-mini-title" style="text-decoration:none;color:inherit;">${p.title}</a>
             <div class="blog-mini-meta">${p.date} · ${p.tag}</div>
           </div>
         </div>
       `).join('')}
     </div>
   `;
-}
-
-function addBlogPost() {
-  const title = document.getElementById('blog-title')?.value.trim();
-  const author = document.getElementById('blog-author')?.value.trim() || 'Ed Bates';
-  const dateVal = document.getElementById('blog-date')?.value;
-  const tag = document.getElementById('blog-tag')?.value;
-  const content = document.getElementById('blog-content')?.value.trim();
-  if (!title || !content) { showToast('Please add a title and content'); return; }
-  const date = dateVal ? new Date(dateVal).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-  blogPosts.unshift({ id: Date.now(), title, author, date, tag, excerpt: content.substring(0, 220) + (content.length > 220 ? '...' : ''), img: allImages[0] });
-  ['blog-title', 'blog-content'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
-  renderBlog();
-  refreshBlogAdmin();
-  showToast('✓ Blog post published!');
-}
-
-function refreshBlogAdmin() {
-  const el = document.getElementById('blog-list-admin');
-  if (!el) return;
-  el.innerHTML = blogPosts.map(p => `
-    <div style="background:rgba(255,255,255,0.04);padding:0.6rem 0.8rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;font-size:0.8rem;color:rgba(255,255,255,0.6)">
-      <div><strong style="color:rgba(255,255,255,0.85)">${p.title}</strong><span style="margin-left:0.6rem;color:var(--accent)">${p.tag}</span></div>
-      <button class="del-btn" onclick="deleteBlogPost(${p.id})">🗑</button>
-    </div>
-  `).join('');
-}
-
-function deleteBlogPost(id) {
-  blogPosts = blogPosts.filter(p => p.id !== id);
-  renderBlog();
-  refreshBlogAdmin();
-  showToast('Post removed');
-}
-
-/* ═══════════════════════════════════════
-   ADMIN AUTH
-═══════════════════════════════════════ */
-function openAdmin() {
-  if (isLoggedIn) { openAdminPanel(); return; }
-  const m = document.getElementById('login-modal');
-  if (m) m.classList.add('open');
-  const u = document.getElementById('login-user');
-  const p = document.getElementById('login-pass');
-  const e = document.getElementById('login-error');
-  if (u) u.value = '';
-  if (p) p.value = '';
-  if (e) e.style.display = 'none';
-  setTimeout(() => { if (u) u.focus(); }, 100);
-}
-function closeLogin() {
-  const m = document.getElementById('login-modal');
-  if (m) m.classList.remove('open');
-}
-function doLogin() {
-  const u = document.getElementById('login-user')?.value.trim();
-  const p = document.getElementById('login-pass')?.value;
-  const e = document.getElementById('login-error');
-  if (u === ADMIN_USER && p === ADMIN_PASS) {
-    isLoggedIn = true;
-    closeLogin();
-    openAdminPanel();
-  } else {
-    if (e) e.style.display = 'block';
-    const pEl = document.getElementById('login-pass');
-    if (pEl) { pEl.value = ''; pEl.focus(); }
-  }
-}
-function openAdminPanel() {
-  const m = document.getElementById('admin-modal');
-  if (m) m.classList.add('open');
-  const firstTab = document.querySelector('.admin-tab');
-  if (firstTab) switchTab('photos', firstTab);
-  refreshManageTable();
-  refreshBlogAdmin();
-  refreshTestAdmin();
-  const dateEl = document.getElementById('blog-date');
-  if (dateEl) dateEl.value = new Date().toISOString().split('T')[0];
-}
-function closeAdminPanel() {
-  const m = document.getElementById('admin-modal');
-  if (m) m.classList.remove('open');
-}
-
-/* ═══════════════════════════════════════
-   ADMIN TABS
-═══════════════════════════════════════ */
-function switchTab(name, btn) {
-  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
-  const tab = document.getElementById('tab-' + name);
-  if (tab) tab.classList.add('active');
-  if (btn) btn.classList.add('active');
-  if (name === 'manage') refreshManageTable();
-  if (name === 'blog') refreshBlogAdmin();
-  if (name === 'testimonials') refreshTestAdmin();
-}
-
-/* ═══════════════════════════════════════
-   BATCH PHOTO UPLOAD
-═══════════════════════════════════════ */
-let batchQueue = [];
-
-function handleBatchSelect(e) {
-  processBatchFiles(Array.from(e.target.files));
-  e.target.value = '';
-}
-
-function processBatchFiles(files) {
-  const imgs = files.filter(f => f.type.startsWith('image/'));
-  if (!imgs.length) { showToast('Please select image files'); return; }
-  imgs.forEach(file => {
-    const reader = new FileReader();
-    reader.onload = ev => {
-      batchQueue.push({ id: Date.now() + Math.random(), file, dataUrl: ev.target.result, category: 'kitchens', title: file.name.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ') });
-      renderBatchQueue();
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-function renderBatchQueue() {
-  const qEl = document.getElementById('batch-queue');
-  const countEl = document.getElementById('batch-count');
-  const actEl = document.getElementById('batch-actions');
-  if (!batchQueue.length) {
-    if (qEl) qEl.innerHTML = '';
-    if (countEl) countEl.textContent = '';
-    if (actEl) actEl.style.display = 'none';
-    return;
-  }
-  if (countEl) countEl.textContent = batchQueue.length + ' photo' + (batchQueue.length > 1 ? 's' : '') + ' queued';
-  if (actEl) actEl.style.display = 'flex';
-  if (qEl) qEl.innerHTML = batchQueue.map((item, i) => `
-    <div class="batch-item">
-      <img class="batch-thumb" src="${item.dataUrl}" alt="">
-      <div class="batch-info">
-        <div class="batch-filename">${item.file.name}</div>
-        <select class="batch-select" onchange="batchQueue[${i}].category=this.value">
-          ${Object.entries(catMeta).map(([k, v]) => `<option value="${k}"${item.category === k ? ' selected' : ''}>${v.icon} ${v.label}</option>`).join('')}
-        </select>
-      </div>
-      <button class="batch-remove" onclick="removeBatchItem(${i})">✕</button>
-    </div>
-  `).join('');
-}
-
-function removeBatchItem(i) { batchQueue.splice(i, 1); renderBatchQueue(); }
-function clearBatch() { batchQueue = []; renderBatchQueue(); }
-
-function setAllCategory() {
-  const cat = document.getElementById('bulk-cat-select')?.value;
-  if (!cat) return;
-  batchQueue.forEach(item => item.category = cat);
-  renderBatchQueue();
-  showToast('All photos set to ' + catMeta[cat].label);
-}
-
-function uploadAllPhotos() {
-  if (!batchQueue.length) { showToast('No photos in queue'); return; }
-  const newItems = batchQueue.map((item, i) => ({
-    id: Date.now() + i,
-    title: item.title || catMeta[item.category].label + ' Project',
-    category: item.category,
-    img: item.dataUrl,
-    large: i === 0 && batchQueue.length > 2
-  }));
-  portfolioItems = [...newItems, ...portfolioItems];
-  const count = batchQueue.length;
-  clearBatch();
-  renderPortfolio();
-  renderHomePortfolio();
-  refreshManageTable();
-  showToast('✓ ' + count + ' photo' + (count > 1 ? 's' : '') + ' added!');
-}
-
-/* ═══════════════════════════════════════
-   MANAGE TABLE
-═══════════════════════════════════════ */
-function refreshManageTable() {
-  const tbody = document.getElementById('manage-tbody');
-  if (!tbody) return;
-  tbody.innerHTML = portfolioItems.map(item => `
-    <tr>
-      <td><img class="manage-thumb" src="${item.img}" alt=""></td>
-      <td>${item.title}</td>
-      <td>${catMeta[item.category]?.label || item.category}</td>
-      <td><button class="del-btn" onclick="deletePortfolioItem(${item.id})">🗑 Delete</button></td>
-    </tr>
-  `).join('');
-}
-
-function deletePortfolioItem(id) {
-  portfolioItems = portfolioItems.filter(i => i.id !== id);
-  refreshManageTable();
-  renderPortfolio();
-  renderHomePortfolio();
-  showToast('Photo removed');
 }
 
 /* ═══════════════════════════════════════
@@ -598,51 +366,74 @@ function showToast(msg) {
 }
 
 /* ═══════════════════════════════════════
-   MODAL OVERLAY CLOSE
-═══════════════════════════════════════ */
-document.addEventListener('click', function(e) {
-  if (e.target.id === 'login-modal') closeLogin();
-  if (e.target.id === 'admin-modal') closeAdminPanel();
-});
-
-/* ═══════════════════════════════════════
-   DRAG & DROP
-═══════════════════════════════════════ */
-function initDropZone() {
-  const dropEl = document.getElementById('batch-drop');
-  if (!dropEl) return;
-  dropEl.addEventListener('dragover', e => { e.preventDefault(); dropEl.classList.add('dragover'); });
-  dropEl.addEventListener('dragleave', () => dropEl.classList.remove('dragover'));
-  dropEl.addEventListener('drop', e => {
-    e.preventDefault();
-    dropEl.classList.remove('dragover');
-    processBatchFiles(Array.from(e.dataTransfer.files));
-  });
-}
-
-/* ═══════════════════════════════════════
-   HASH ROUTING
-═══════════════════════════════════════ */
-window.addEventListener('hashchange', () => {
-  const hash = window.location.hash.substring(1);
-  const valid = ['home','portfolio','services','about','testimonials','blog','contact'];
-  if (valid.includes(hash)) showPage(hash);
-});
-
-/* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   initFeaturedHero();
   initServiceCarousels();
+
+  // Try to load external data, fallback to hardcoded if fail
+  try {
+    const [revRes, postRes, manifestRes] = await Promise.all([
+      fetch('data/reviews.json').then(r => r.ok ? r.json() : null),
+      fetch('data/posts.json').then(r => r.ok ? r.json() : null),
+      fetch('data/image_manifest.json').then(r => r.ok ? r.json() : null)
+    ]);
+    if (revRes) testimonials = revRes;
+    if (postRes) blogPosts = postRes;
+
+    if (manifestRes) {
+      // Merge manifest URLs into imagePools
+      Object.keys(manifestRes).forEach(cat => {
+        const manifestUrls = manifestRes[cat].map(img => img.url);
+        if (imagePools[cat]) {
+          // Avoid duplicates if we already have some hardcoded ones
+          imagePools[cat] = [...new Set([...imagePools[cat], ...manifestUrls])];
+        } else {
+          imagePools[cat] = manifestUrls;
+        }
+      });
+    }
+  } catch (err) {
+    console.warn('Dynamic data load failed, using fallbacks');
+  }
+
   renderHomePortfolio();
   renderTestimonials();
   renderBlog();
   renderPortfolio();
-  initDropZone();
 
-  // Handle direct hash navigation on load
-  const hash = window.location.hash.substring(1);
-  const valid = ['home','portfolio','services','about','testimonials','blog','contact'];
-  if (hash && valid.includes(hash)) showPage(hash);
+  if (window.location.pathname.includes('blog-post.html')) {
+    initBlogPost();
+  }
 });
+
+function initBlogPost() {
+  const c = document.getElementById('blog-post-content');
+  if (!c) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'));
+  const post = blogPosts.find(p => p.id === id) || blogPosts[0];
+
+  if (!post) {
+    c.innerHTML = '<h1>Post not found</h1><p><a href="blog.html">Return to blog</a></p>';
+    return;
+  }
+
+  c.innerHTML = `
+    <div class="section-label">${post.tag}</div>
+    <h1 class="section-title" style="margin-top:0.5rem">${post.title}</h1>
+    <div style="color:rgba(255,255,255,0.4); margin-bottom: 2rem;">${post.date} · By ${post.author}</div>
+    
+    <img src="${getOptimizedUrl(post.img, 1200)}" style="width:100%; border-radius:12px; margin-bottom:2rem;" alt="${post.title}">
+    
+    <div class="blog-post-body" style="line-height:1.7; color:rgba(255,255,255,0.8); font-size:1.1rem">
+      ${post.content ? post.content.split('\n').map(p => `<p>${p}</p>`).join('') : '<p>' + post.excerpt + '</p>'}
+    </div>
+    
+    <div style="margin-top:4rem; padding-top:2rem; border-top: 1px solid rgba(255,255,255,0.1)">
+      <a href="blog.html" class="btn-outline">← Back to Blog</a>
+    </div>
+  `;
+}
