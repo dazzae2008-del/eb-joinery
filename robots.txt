@@ -1,4 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /admin.html
+Disallow: /admin
+Disallow: /data/
+Disallow: /netlify/
+Disallow: /.github/
+
+Allow: /
 
 Sitemap: https://ebjoinery.co.uk/sitemap.xml

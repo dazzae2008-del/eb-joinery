@@ -494,6 +494,16 @@ function initBlogPost() {
     return;
   }
 
+  // Inject dynamic SEO tags for the blog post
+  document.title = `${post.title} | EB Joinery Widnes`;
+  let canon = document.querySelector('link[rel="canonical"]');
+  if (!canon) {
+    canon = document.createElement('link');
+    canon.rel = 'canonical';
+    document.head.appendChild(canon);
+  }
+  canon.href = `https://ebjoinery.co.uk/blog-post.html?id=${post.id}`;
+
   c.innerHTML = `
     <div class="section-label">${post.tag}</div>
     <h1 class="section-title" style="margin-top:0.5rem">${post.title}</h1>
