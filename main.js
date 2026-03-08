@@ -267,7 +267,7 @@ function toggleMobile() {
 function initScrollAnimations() {
   const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+    rootMargin: '0px 0px -30px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -297,8 +297,8 @@ function renderPortfolio() {
       <div class="portfolio-card filter-item ${p.category}">
         <img src="${getOptimizedUrl(p.img, 800)}" alt="${p.title}" loading="lazy">
         <div class="portfolio-overlay">
-          <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem;">${catMeta[p.category]?.label || p.category}</div>
-          <div style="font-family:var(--font-display); font-size:1.3rem;">${p.title}</div>
+          <div class="portfolio-cat">${catMeta[p.category]?.label || p.category}</div>
+          <div class="portfolio-title">${p.title}</div>
         </div>
       </div>
     `).join('');
