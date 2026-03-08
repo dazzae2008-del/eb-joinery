@@ -2042,24 +2042,14 @@ footer {
 
 /* ── GLOBAL CTA ── */
 .global-cta {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
   padding: 6rem 5vw;
   text-align: center;
   position: relative;
   overflow: hidden;
   margin-top: 4rem;
-}
-
-.global-cta::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
-  pointer-events: none;
+  border-top: 1px solid var(--grey-mid);
 }
 
 .global-cta h2 {
@@ -2067,6 +2057,7 @@ footer {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
+  color: var(--black);
   position: relative;
   z-index: 1;
 }
@@ -2074,7 +2065,7 @@ footer {
 .global-cta p {
   font-size: 1.1rem;
   margin-bottom: 2.5rem;
-  opacity: 0.9;
+  color: var(--grey-dark);
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -2083,8 +2074,8 @@ footer {
 }
 
 .global-cta .btn-cta {
-  background: var(--white);
-  color: var(--accent-dark);
+  background: var(--black);
+  color: var(--white);
   padding: 1.2rem 2.8rem;
   font-size: 0.85rem;
   font-weight: 700;
@@ -2093,7 +2084,7 @@ footer {
   border-radius: 50px;
   text-decoration: none;
   display: inline-block;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
   position: relative;
   z-index: 1;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -2102,27 +2093,5 @@ footer {
 .global-cta .btn-cta:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-}
-
-.global-cta-minimal {
-  background: var(--white);
-  color: var(--black);
-  border-top: 1px solid var(--grey-mid);
-}
-
-.global-cta-minimal::before {
-  display: none;
-}
-
-.global-cta-minimal h2 {
-  color: var(--black);
-}
-
-.global-cta-minimal p {
-  color: var(--grey-dark);
-}
-
-.global-cta-minimal .btn-cta {
-  background: var(--black);
-  color: var(--white);
+  background: var(--blue-dark);
 }
