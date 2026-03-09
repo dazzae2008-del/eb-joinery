@@ -552,7 +552,7 @@ section {
 .section-title em {
   font-family: var(--font-serif);
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-on-light);
 }
 
 .section-subtitle {
@@ -743,6 +743,7 @@ section {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   transition: var(--transition-fluid);
+  aspect-ratio: 4/3;
 }
 
 .portfolio-item:hover,
@@ -871,7 +872,7 @@ section {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.3rem;
-  color: var(--accent);
+  color: var(--accent-on-light);
   line-height: 1.5;
   margin: 2rem 0;
   padding-left: 1.5rem;
@@ -1778,6 +1779,10 @@ footer {
 
   .nav-phone {
     display: none;
+  }
+
+  .toast {
+    bottom: 5.5rem;
   }
 
   .nav-links {

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EB Joinery — Redesign Audit v3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f2ed;
+    --paper-dark: #ede9e2;
+    --red: #c0392b;
+    --amber: #d97706;
+    --green: #16a34a;
+    --blue: #1d4ed8;
+    --muted: #6b6560;
+    --rule: #d4cfc8;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Lora', Georgia, serif;
+    --display: 'Syne', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--serif);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: var(--ink);
+    color: #f5f2ed;
+    padding: 6rem 8vw 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--blue);
+  }
+  .cover-kicker {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.4);
+    margin-bottom: 2rem;
+  }
+  .cover h1 {
+    font-family: var(--display);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    max-width: 700px;
+  }
+  .cover h1 em { color: var(--blue); font-style: normal; }
+  .cover-sub {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: rgba(245,242,237,0.65);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .cover-meta { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+  .cover-meta-item {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.45);
+  }
+  .cover-meta-item strong {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(245,242,237,0.9);
+    margin-top: 0.2rem;
+    letter-spacing: 0;
+  }
+
+  /* ── SCORECARD ── */
+  .scorecard {
+    background: var(--paper-dark);
+    border-bottom: 1px solid var(--rule);
+    padding: 3.5rem 8vw;
+  }
+  .scorecard-heading {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .score-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 1.8rem 2rem;
+  }
+  .score-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .score-value {
+    font-family: var(--display);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .score-value sup { font-size: 1.2rem; opacity: 0.4; }
+  .score-delta {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    margin-top: 0.6rem;
+    color: var(--green);
+  }
+  .score-delta.amber { color: var(--amber); }
+  .score-history {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    letter-spacing: 0.04em;
+  }
+  .tier-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--ink);
+    color: #f5f2ed;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+  }
+  .tier-badge .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    flex-shrink: 0;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 4rem 8vw;
+  }
+
+  .section-heading {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--rule);
+    padding-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .section-heading:first-of-type { margin-top: 0; }
+
+  h2 {
+    font-family: var(--display);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  p { margin-bottom: 1rem; color: #2a2725; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── ISSUE CARDS ── */
+  .issue {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+  }
+  .issue-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    background: var(--paper);
+  }
+  .issue.fixed .issue-header { background: #f0fdf4; border-left: 3px solid var(--green); }
+  .issue.pending-critical .issue-header { background: #fef2f2; border-left: 3px solid var(--red); }
+  .issue.pending-moderate .issue-header { background: #fffbeb; border-left: 3px solid var(--amber); }
+  .issue.pending-minor .issue-header { background: var(--paper-dark); border-left: 3px solid var(--rule); }
+  .issue.new .issue-header { background: #eff6ff; border-left: 3px solid var(--blue); }
+
+  .issue-badge {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+  .badge-fixed { background: #dcfce7; color: #15803d; }
+  .badge-critical { background: #fee2e2; color: #b91c1c; }
+  .badge-moderate { background: #fef3c7; color: #b45309; }
+  .badge-minor { background: var(--paper-dark); color: var(--muted); border: 1px solid var(--rule); }
+  .badge-new { background: #dbeafe; color: #1d4ed8; }
+
+  .issue-title {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+    flex: 1;
+  }
+  .issue-body {
+    padding: 0.9rem 1.5rem 1.2rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.9rem;
+    color: #3a3632;
+  }
+  .issue-body p { margin-bottom: 0.6rem; font-size: 0.9rem; }
+  .issue-body code {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    background: var(--paper-dark);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    color: var(--ink);
+  }
+  .issue-fix {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .issue-fix strong { color: var(--ink); }
+
+  /* ── PROGRESS TABLE ── */
+  .progress-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+  }
+  .progress-table th {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--rule);
+    background: var(--paper-dark);
+  }
+  .progress-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: middle;
+  }
+  .progress-table tr:last-child td { border-bottom: none; }
+  .tick { color: var(--green); font-size: 1rem; }
+  .cross { color: var(--red); font-size: 1rem; }
+  .partial { color: var(--amber); font-size: 1rem; }
+
+  /* ── FOOTER ── */
+  .report-footer {
+    background: var(--ink);
+    color: rgba(245,242,237,0.4);
+    padding: 2.5rem 8vw;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-kicker">EB Joinery · ebjoinery.co.uk</div>
+  <h1>Redesign Audit<br><em>v3</em></h1>
+  <p class="cover-sub">Third-pass review covering the new files uploaded: services.html, four SEO landing pages, areas-we-cover.html, sitemap.xml, _redirects, style.css, and main.js. Scores updated accordingly.</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">Round<strong>v3 — March 2026</strong></div>
+    <div class="cover-meta-item">Files Reviewed<strong>9 new uploads</strong></div>
+    <div class="cover-meta-item">Prior Rounds<strong>v1 · v2</strong></div>
+  </div>
+</div>
+
+<!-- SCORECARD -->
+<div class="scorecard">
+  <div class="scorecard-heading">Overall Scores — Three-Round Comparison</div>
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="score-label">UI / Visual Design</div>
+      <div class="score-value">8.0<sup>/10</sup></div>
+      <div class="score-delta">→ Unchanged</div>
+      <div class="score-history">v1: 7.5 · v2: 8.0 · v3: 8.0</div>
+    </div>
+    <div class="score-card">
+      <div class="score-label">Mobile Optimisation</div>
+      <div class="score-value">7.5<sup>/10</sup></div>
+      <div class="score-delta amber">▼ −1.0 — new pages lack mobile CTA bar</div>
+      <div class="score-history">v1: 6.5 · v2: 8.5 · v3: 7.5</div>
+    </div>
+    <div class="score-card">
+      <div class="score-label">Technical SEO</div>
+      <div class="score-value">8.5<sup>/10</sup></div>
+      <div class="score-delta">▲ +1.0 — clean blog slugs, sitemap complete</div>
+      <div class="score-history">v1: 6.0 · v2: 7.5 · v3: 8.5</div>
+    </div>
+  </div>
+  <div class="tier-badge"><span class="dot"></span> Upper-mid agency tier — estimated £12,000–£18,000 equivalent</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+
+  <div class="section-heading">What Changed This Round</div>
+  <h2>New files, new issues, and some genuine progress</h2>
+  <p>The _redirects file solves the single biggest outstanding SEO issue from v2 — blog post URLs now have clean slugs. The sitemap is comprehensive and correctly prioritised. The landing pages carry solid, page-specific schema and OG tags. But four new pages were deployed without the mobile CTA bar, scroll cue, or BreadcrumbList that the main pages now have, which pulls the mobile score back down.</p>
+
+  <!-- PROGRESS TABLE -->
+  <div class="section-heading">V2 Pending Issues — Resolution Status</div>
+  <h2>What got fixed, what didn't</h2>
+
+  <table class="progress-table">
+    <thead>
+      <tr>
+        <th>Issue</th>
+        <th>V2 Priority</th>
+        <th>V3 Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Blog post clean slug URLs</td>
+        <td>Minor</td>
+        <td><span class="tick">✓</span> Fixed via _redirects</td>
+      </tr>
+      <tr>
+        <td>Blog dynamic SEO injection (title, og:title, og:image, canonical)</td>
+        <td>Critical</td>
+        <td><span class="tick">✓</span> Fixed in main.js — setMeta() injects all tags</td>
+      </tr>
+      <tr>
+        <td>Sitemap complete with all URLs and correct priorities</td>
+        <td>Critical</td>
+        <td><span class="tick">✓</span> All 12 pages present, priorities correct</td>
+      </tr>
+      <tr>
+        <td>Accent colour rollout — .section-title em, .service-link, .about-quote</td>
+        <td>Moderate</td>
+        <td><span class="partial">~</span> Partial — .service-link fixed, .section-title em and .about-quote still use var(--accent)</td>
+      </tr>
+      <tr>
+        <td>Page-hero gradient ending white</td>
+        <td>Moderate</td>
+        <td><span class="tick">✓</span> Fixed — gradient now ends #1b3a6b 100%</td>
+      </tr>
+      <tr>
+        <td>JS-only portfolio content (empty HTML source)</td>
+        <td>Critical</td>
+        <td><span class="cross">✗</span> Still pending — not in uploaded files</td>
+      </tr>
+      <tr>
+        <td>Portfolio image CLS (no aspect-ratio on container)</td>
+        <td>Moderate</td>
+        <td><span class="cross">✗</span> Still pending — .portfolio-card has no aspect-ratio</td>
+      </tr>
+      <tr>
+        <td>Toast hidden by mobile CTA bar</td>
+        <td>Moderate</td>
+        <td><span class="cross">✗</span> Still pending — toast bottom: 2rem, no mobile override</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- NEW ISSUES FROM THIS ROUND -->
+  <div class="section-heading">New Findings — v3</div>
+  <h2>Issues introduced or discovered in the new files</h2>
+
+  <!-- CRITICAL -->
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-critical">Critical</span>
+      <div class="issue-title">Landing pages missing mobile CTA bar — 4 pages regress mobile UX</div>
+    </div>
+    <div class="issue-body">
+      <p><code>joinery-services-widnes.html</code>, <code>home-improvements-liverpool.html</code>, <code>bespoke-joinery-cheshire.html</code>, and <code>areas-we-cover.html</code> all have zero instances of <code>mobile-cta</code>. These are likely your highest-traffic SEO pages and the most probable first landing point for mobile users searching by location — yet they're the only pages without the sticky Call Now bar.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Copy the <code>.mobile-cta-bar</code> block from any main page into the <code>&lt;body&gt;</code> of all four files, and add <code>padding-bottom: 5rem</code> to the footer on each.</p>
+    </div>
+  </div>
+
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-critical">Critical</span>
+      <div class="issue-title">Landing pages have no BreadcrumbList schema</div>
+    </div>
+    <div class="issue-body">
+      <p>All four landing pages and <code>areas-we-cover.html</code> carry <code>LocalBusiness</code> and <code>Service</code> schema but no <code>BreadcrumbList</code>. These pages benefit most from breadcrumb rich results in Google — they're the targeted local search pages. <code>services.html</code> does have BreadcrumbList correctly. The gap is specifically on the four geo-targeted files.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Add a BreadcrumbList JSON-LD block to each: <code>Home → [Page Name]</code>, pointing to the correct canonical URL.</p>
+    </div>
+  </div>
+
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-critical">Critical</span>
+      <div class="issue-title">Landing pages missing geo meta tags entirely</div>
+    </div>
+    <div class="issue-body">
+      <p>The geo.region / geo.placename / geo.position meta tags added in v2 are present on <code>services.html</code> but absent from all four new landing pages. This is particularly notable for <code>joinery-services-widnes.html</code> and <code>bespoke-joinery-cheshire.html</code> — pages whose entire purpose is local geographic targeting. They have no geo signal at all in the meta layer.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Add the three geo meta tags to each page's <code>&lt;head&gt;</code>, adjusting placename and position per page (e.g. Liverpool: <code>53.4084;-2.9916</code>, Cheshire: <code>53.1903;-2.8923</code>).</p>
+    </div>
+  </div>
+
+  <!-- MODERATE -->
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-moderate">Moderate</span>
+      <div class="issue-title">Blog internal links still use query strings despite clean slug redirects existing</div>
+    </div>
+    <div class="issue-body">
+      <p>The <code>_redirects</code> file correctly maps clean slugs like <code>/blog/5-ways-to-add-value-to-your-home</code> to <code>/blog-post.html?id=1</code>. However, <code>main.js</code> still generates all blog links with <code>blog-post.html?id=${p.id}</code>. This means Google crawls the query string URL, not the clean slug. The redirect is in the wrong direction for SEO — you want the clean slug to be the canonical, not a redirect target.</p>
+      <p class="issue-fix"><strong>Fix:</strong> In <code>main.js</code>, add a slug map object and generate links as <code>/blog/[slug]</code>. Update the blog post canonical in <code>setMeta()</code> at line 520 to use the clean slug too. Reverse the _redirects so the clean slug is the destination, not the source — or keep as 301 but ensure the canonical points to the clean URL.</p>
+    </div>
+  </div>
+
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-moderate">Moderate</span>
+      <div class="issue-title">Landing pages missing scroll cue — 100svh hero with no scroll signal</div>
+    </div>
+    <div class="issue-body">
+      <p>The four landing pages all use a full-viewport hero with no <code>.scroll-cue</code> element. The scroll cue was implemented on the main pages in v2 precisely because users couldn't tell there was content below the fold. The same problem exists here — and arguably matters more, since these pages need users to scroll down to the service cards and CTA sections that drive conversions.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Add the <code>.scroll-cue</code> SVG chevron element (already in <code>style.css</code>) to the hero section of each landing page.</p>
+    </div>
+  </div>
+
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-moderate">Moderate</span>
+      <div class="issue-title">Sitemap omits clean blog slug URLs — crawlers only see blog.html</div>
+    </div>
+    <div class="issue-body">
+      <p>The sitemap correctly includes <code>blog.html</code> but contains no entries for individual blog posts. Now that clean slugs exist via <code>_redirects</code>, the four blog post URLs (<code>/blog/5-ways-to-add-value-to-your-home</code> etc.) should be in the sitemap. Without this, Google has no direct crawl path to the individual posts — it has to discover them by crawling the blog listing page and following JS-rendered links.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Add the four clean blog slug URLs to <code>sitemap.xml</code> with <code>changefreq: monthly</code>, <code>priority: 0.6</code>.</p>
+    </div>
+  </div>
+
+  <!-- MINOR -->
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-minor">Minor</span>
+      <div class="issue-title">areas-we-cover.html has no internal links to the three geo landing pages</div>
+    </div>
+    <div class="issue-body">
+      <p>The Areas We Cover page mentions Widnes, Liverpool, Warrington, and Cheshire in its content sections but doesn't link to the dedicated landing pages for those regions. This is a missed internal linking opportunity — a user reading about Liverpool coverage would naturally click through to the Liverpool-specific page, and Google would see the topical connection between the pages.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Add contextual links from each area card to its corresponding landing page: Widnes → <code>joinery-services-widnes.html</code>, Liverpool → <code>home-improvements-liverpool.html</code>, Cheshire → <code>bespoke-joinery-cheshire.html</code>.</p>
+    </div>
+  </div>
+
+  <div class="issue new">
+    <div class="issue-header">
+      <span class="issue-badge badge-minor">Minor</span>
+      <div class="issue-title">Landing pages expose /admin.html in navbar — publicly visible link</div>
+    </div>
+    <div class="issue-body">
+      <p>All four landing pages include <code>&lt;a href="/admin.html"&gt;</code> in the navigation. While admin.html is noindex and login-protected, surfacing the admin link publicly on every page is unnecessary and unprofessional. A determined user or competitor could find and repeatedly probe the admin login. The main pages likely have this too, but it's worth removing from all pages.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Remove the admin link from all nav elements. Access admin directly by URL when needed.</p>
+    </div>
+  </div>
+
+  <!-- PERSISTENT ISSUES -->
+  <div class="section-heading">Persistent Issues — Carried from v2</div>
+  <h2>Still outstanding from the last round</h2>
+
+  <div class="issue pending-critical">
+    <div class="issue-header">
+      <span class="issue-badge badge-critical">Critical</span>
+      <div class="issue-title">JS-only portfolio — #main-portfolio-grid empty in HTML source</div>
+    </div>
+    <div class="issue-body">
+      <p>Portfolio content is still entirely JavaScript-rendered. The HTML source contains an empty <code>#main-portfolio-grid</code> div. Google's crawler may not execute JS or may delay rendering, making portfolio content invisible to the index. This is the single highest-impact remaining SEO issue on the site.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Pre-render 12 static portfolio cards as crawlable HTML baseline in portfolio.html. JS can still hydrate and extend dynamically on top.</p>
+    </div>
+  </div>
+
+  <div class="issue pending-moderate">
+    <div class="issue-header">
+      <span class="issue-badge badge-moderate">Moderate</span>
+      <div class="issue-title">Accent colour incomplete — .section-title em and .about-quote still use var(--accent)</div>
+    </div>
+    <div class="issue-body">
+      <p><code>.service-link</code> (line 676) was updated to <code>var(--accent-on-light)</code> correctly. But <code>.section-title em</code> (line 555) and <code>.about-quote</code> (line 874) still reference <code>var(--accent)</code> — which is <code>#38bdf8</code>, a light blue with only ~2.8:1 contrast on white. These appear on white-background sections and fail WCAG AA.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Change both to <code>var(--accent-on-light)</code> (<code>#1a5f7a</code> — 5.9:1 contrast). Two-line fix in style.css.</p>
+    </div>
+  </div>
+
+  <div class="issue pending-moderate">
+    <div class="issue-header">
+      <span class="issue-badge badge-moderate">Moderate</span>
+      <div class="issue-title">CLS risk — .portfolio-card has no aspect-ratio container</div>
+    </div>
+    <div class="issue-body">
+      <p><code>.portfolio-card img</code> has <code>aspect-ratio: 16/9</code> at mobile breakpoints (line 2093) but the card container itself has no explicit aspect-ratio or fixed height. Without a known container size, the browser can't reserve space before the image loads, causing layout shift scored against Core Web Vitals.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Add <code>aspect-ratio: 4/3</code> to <code>.portfolio-card, .portfolio-item</code> at lines 736–746.</p>
+    </div>
+  </div>
+
+  <div class="issue pending-moderate">
+    <div class="issue-header">
+      <span class="issue-badge badge-moderate">Moderate</span>
+      <div class="issue-title">Toast notification obscured by mobile CTA bar</div>
+    </div>
+    <div class="issue-body">
+      <p>The <code>#toast</code> element is fixed at <code>bottom: 2rem</code>. The mobile CTA bar is fixed at the bottom with a height of approximately 3.5–4rem. On mobile, a successful form submission toast will appear beneath the CTA bar — invisible to the user who just submitted the form.</p>
+      <p class="issue-fix"><strong>Fix:</strong> Add <code>@media (max-width: 900px) { .toast { bottom: 5rem; } }</code> to style.css.</p>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section-heading">Summary</div>
+  <h2>Where things stand after three rounds</h2>
+  <p>The most significant SEO wins this round are the clean blog slug redirects and the complete sitemap — both solid additions. The landing pages are well-structured with good schema and OG tags, and the design system is applied consistently across all of them.</p>
+  <p>The drop in mobile score is a direct consequence of deploying four new high-traffic pages without the mobile CTA bar and scroll cue that exist on every main page. This needs to be the first thing fixed — these are your primary local search landing pages.</p>
+  <p>After resolving the mobile CTA gap on the landing pages and adding geo meta tags and BreadcrumbList to match, the site moves decisively into upper-mid territory across all three categories. The remaining persistent issues (portfolio static render, CLS, toast) are the last technical quality flags before this would pass a rigorous agency QA checklist.</p>
+
+</div>
+
+<div class="report-footer">
+  <span>EB Joinery · ebjoinery.co.uk · Audit v3 · March 2026</span>
+  <span>Categories: UI / Mobile / SEO</span>
+</div>
+
+</body>
+</html>

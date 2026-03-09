@@ -231,10 +231,10 @@ function initDataObjects() {
   // Rebuild Blog (with fetched data if available, else fallback)
   if (!blogPosts || blogPosts.length === 0) {
     blogPosts = [
-      { id: 1, featured: true, title: '5 Ways to Add Value to Your Home', author: 'Ed Bates', date: '12 Nov 2024', tag: 'Tips', excerpt: 'Quality home improvements can transform your property and significantly boost its market value. Here are five upgrades that offer the best return on investment...', img: imagePools.kitchens[0] },
-      { id: 2, title: 'How to Choose the Right Wood for Your Joinery', author: 'Ed Bates', date: '28 Oct 2024', tag: 'Guide', img: imagePools.joinery[0] },
-      { id: 3, title: 'Our Latest Loft Conversion — Before & After', author: 'Ed Bates', date: '5 Oct 2024', tag: 'Project', img: imagePools['loft-conversions'][0] },
-      { id: 4, title: 'Bathroom Trends for 2025', author: 'Ed Bates', date: '18 Sep 2024', tag: 'Tips', img: imagePools.bathrooms[0] },
+      { id: 1, featured: true, title: '5 Ways to Add Value to Your Home', slug: '5-ways-to-add-value-to-your-home', author: 'Ed Bates', date: '12 Nov 2024', tag: 'Tips', excerpt: 'Quality home improvements can transform your property and significantly boost its market value. Here are five upgrades that offer the best return on investment...', img: imagePools.kitchens[0] },
+      { id: 2, title: 'How to Choose the Right Wood for Your Joinery', slug: 'how-to-choose-the-right-wood-for-your-joinery', author: 'Ed Bates', date: '28 Oct 2024', tag: 'Guide', img: imagePools.joinery[0] },
+      { id: 3, title: 'Our Latest Loft Conversion — Before & After', slug: 'our-latest-loft-conversion-before-and-after', author: 'Ed Bates', date: '5 Oct 2024', tag: 'Project', img: imagePools['loft-conversions'][0] },
+      { id: 4, title: 'Bathroom Trends for 2025', slug: 'bathroom-trends-for-2025', author: 'Ed Bates', date: '18 Sep 2024', tag: 'Tips', img: imagePools.bathrooms[0] },
     ];
   }
 
@@ -373,12 +373,12 @@ function renderBlog() {
   c.innerHTML = `
     <div class="blog-featured">
       <div class="blog-featured-img">
-        <a href="blog-post.html?id=${featured.id}">
+        <a href="/blog/${featured.slug}">
           <img src="${getOptimizedUrl(featured.img, 1200)}" style="width:100%;height:100%;object-fit:cover" alt="${featured.title}" loading="lazy">
         </a>
       </div>
       <div class="blog-tag">${featured.tag}</div>
-      <a href="blog-post.html?id=${featured.id}" class="blog-title-link">${featured.title}</a>
+      <a href="/blog/${featured.slug}" class="blog-title-link">${featured.title}</a>
       <div class="blog-meta">${featured.date} · By ${featured.author}</div>
       <p class="blog-excerpt">${featured.excerpt || ''}</p>
     </div>
@@ -386,12 +386,12 @@ function renderBlog() {
       ${rest.map(p => `
         <div class="blog-mini">
           <div class="blog-mini-img">
-            <a href="blog-post.html?id=${p.id}">
+            <a href="/blog/${p.slug}">
               <img src="${getOptimizedUrl(p.img, 76)}" alt="${p.title}" width="76" height="68" loading="lazy">
             </a>
           </div>
           <div>
-            <a href="blog-post.html?id=${p.id}" class="blog-mini-title" style="text-decoration:none;color:inherit;">${p.title}</a>
+            <a href="/blog/${p.slug}" class="blog-mini-title" style="text-decoration:none;color:inherit;">${p.title}</a>
             <div class="blog-mini-meta">${p.date} · ${p.tag}</div>
           </div>
         </div>
@@ -502,7 +502,8 @@ function initBlogPost() {
 
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get('id'));
-  const post = blogPosts.find(p => p.id === id) || blogPosts[0];
+  const slug = params.get('slug');
+  const post = blogPosts.find(p => (slug && p.slug === slug) || (id && p.id === id)) || blogPosts[0];
 
   if (!post) {
     c.innerHTML = '<h1>Post not found</h1><p><a href="blog.html">Return to blog</a></p>';
@@ -517,7 +518,7 @@ function initBlogPost() {
     canon.rel = 'canonical';
     document.head.appendChild(canon);
   }
-  canon.href = `https://ebjoinery.co.uk/blog-post.html?id=${post.id}`;
+  canon.href = `https://ebjoinery.co.uk/blog/${post.slug}`;
 
   // Inject OG tags for social sharing
   const setMeta = (prop, content, isName = false) => {
@@ -529,7 +530,7 @@ function initBlogPost() {
   setMeta('og:title', `${post.title} | EB Joinery Widnes`);
   setMeta('og:description', post.excerpt || post.title);
   setMeta('og:image', getOptimizedUrl(post.img, 1200));
-  setMeta('og:url', `https://ebjoinery.co.uk/blog-post.html?id=${post.id}`);
+  setMeta('og:url', `https://ebjoinery.co.uk/blog/${post.slug}`);
   setMeta('description', post.excerpt || post.title, true);
 
   c.innerHTML = `

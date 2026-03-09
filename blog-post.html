@@ -4,33 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | EB Joinery Widnes</title>
+    <title>Blog | EB Joinery Widnes | Home Improvement Tips & Project Updates</title>
+    <meta name="description" content="Home improvement tips, project spotlights and joinery advice from EB Joinery Widnes. Read the latest from Ed Bates.">
+    <meta name="geo.region" content="GB-CHE">
+    <meta name="geo.placename" content="Widnes, Cheshire">
+    <meta name="geo.position" content="53.3683;-2.7276">
+    <link rel="canonical" href="https://ebjoinery.co.uk/blog.html">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Blog | EB Joinery Widnes | Home Improvement Tips & Project Updates">
+    <meta property="og:description" content="Home improvement tips, project spotlights and joinery advice from EB Joinery Widnes.">
+    <meta property="og:site_name" content="EB Joinery" />
+    <meta property="og:image" content="https://res.cloudinary.com/die5rq3ua/image/upload/f_auto,q_auto,w_1200/v1772657462/473543467_1775541593199303_6408288811264688599_n_yvgu8e.webp">
+    <meta property="og:url" content="https://ebjoinery.co.uk/blog.html">
+    <meta property="og:type" content="website" />
     <link rel="stylesheet" href="style.css?v=19">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <nav>
-        <a href="index.html" class="nav-logo">
+        <a href="index.html" class="nav-logo" style="display: flex; align-items: center; gap: 8px;">
             <img src="https://res.cloudinary.com/die5rq3ua/image/upload/v1772713832/eb_joinery_navbar_txakzc.webp"
                 alt="EB Joinery Logo" class="brand-logo">
         </a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="testimonials.html">Testimonials</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" data-page="home">Home</a></li>
+            <li><a href="portfolio.html" data-page="portfolio">Portfolio</a></li>
+            <li><a href="services.html" data-page="services">Services</a></li>
+            <li><a href="about.html" data-page="about">About</a></li>
+            <li><a href="testimonials.html" data-page="testimonials">Testimonials</a></li>
+            <li><a href="blog.html" data-page="blog" class="active">Blog</a></li>
+            <li><a href="contact.html" class="nav-cta" data-page="contact">Get a Quote</a></li>
         </ul>
         <a href="tel:07803676949" class="nav-phone"><span>📞</span> 07803 676949</a>
         <div class="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></div>
-    </nav>
     </nav>
     <div class="mobile-menu" id="mobile-menu">
         <a href="index.html">Home</a>
@@ -52,8 +61,7 @@
 
     <aside class="global-cta fade-up">
         <h2>Ready to Start Your Project?</h2>
-        <p>Contact us today for a free design consultation and itemised quote. Let's build something brilliant together.
-        </p>
+        <p>Contact us today for a free design consultation and itemised quote. Let's build something brilliant together.</p>
         <a href="contact.html" class="btn-cta">Get Your Free Quote</a>
     </aside>
 
@@ -61,21 +69,15 @@
         <div class="footer-grid">
             <div>
                 <div class="footer-brand-name">EB<span>.</span>JOINERY</div>
-                <address
-                    style="font-style:normal; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;">
+                <address style="font-style:normal; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;">
                     Serving Widnes, Liverpool, Cheshire, Manchester & the Northwest<br>
                     <a href="tel:07803676949" style="color:var(--accent); text-decoration:none;">07803676949</a><br>
-                    <a href="mailto:ed@ebjoinery.co.uk">ed@ebjoinery.co.uk</a>
+                    <a href="/cdn-cgi/l/email-protection#1b7e7f5b7e79717472757e6962357874356e70"><span class="__cf_email__" data-cfemail="5530311530373f3a3c3b30272c7b363a7b203e">[email&#160;protected]</span></a>
                 </address>
-                <p class="footer-brand-desc">EB Joinery provides expert joinery, home improvement and building services.
-                    Bespoke
-                    craftsmanship, reliable service, free quotes.</p>
-                <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.5rem"><a class="footer-fb"
-                        href="https://www.facebook.com/p/EB-Joinery-100032892682664/" target="_blank"
-                        rel="noopener">Follow us on Facebook →</a>
-                    <a href="https://g.page/r/CZDqnNK-LNHQEAE/review" target="_blank" rel="noopener"
-                        style="font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#f59e0b;text-decoration:none;">⭐
-                        Leave a Google Review</a>
+                <p class="footer-brand-desc">EB Joinery provides expert joinery, home improvement and building services. Bespoke craftsmanship, reliable service, free quotes.</p>
+                <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.5rem">
+                    <a class="footer-fb" href="https://www.facebook.com/p/EB-Joinery-100032892682664/" target="_blank" rel="noopener">Follow us on Facebook →</a>
+                    <a href="https://g.page/r/CZDqnNK-LNHQEAE/review" target="_blank" rel="noopener" style="font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#f59e0b;text-decoration:none;">⭐ Leave a Google Review</a>
                 </div>
             </div>
             <div>
@@ -104,18 +106,25 @@
                 <ul class="footer-links">
                     <li><a href="contact.html">Get a Quote</a></li>
                     <li><a href="tel:07803676949">Call Us</a></li>
-                    <li><a href="mailto:ed@ebjoinery.co.uk">Email Us</a></li>
-                    <li><a href="https://www.facebook.com/p/EB-Joinery-100032892682664/" target="_blank">Facebook</a>
-                    </li>
+                    <li><a href="/cdn-cgi/l/email-protection#5c39381c393e36333532392e25723f33722937">Email Us</a></li>
+                    <li><a href="https://www.facebook.com/p/EB-Joinery-100032892682664/" target="_blank">Facebook</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <div>© 2025 EB Joinery. All rights reserved.</div>
+            <div>Crafted with precision.</div>
         </div>
     </footer>
 
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script src="main.js?v=19" defer></script>
-</body>
 
+    <!-- Sticky Mobile CTA Bar -->
+    <div class="mobile-cta-bar">
+        <a href="tel:07803676949" class="mcta-call">📞 Call Now</a>
+        <a href="contact.html" class="mcta-quote">Get a Free Quote</a>
+    </div>
+
+</body>
 </html>
