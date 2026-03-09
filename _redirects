@@ -5,3 +5,9 @@
 /blog           /blog.html        200
 /contact        /contact.html     200
 /admin          /admin.html       200
+
+# Blog post clean slug URLs (SEO-friendly redirects)
+/blog/5-ways-to-add-value-to-your-home              /blog-post.html?id=1  301
+/blog/how-to-choose-the-right-wood-for-your-joinery /blog-post.html?id=2  301
+/blog/our-latest-loft-conversion-before-and-after   /blog-post.html?id=3  301
+/blog/bathroom-trends-for-2025                      /blog-post.html?id=4  301

@@ -245,7 +245,7 @@ main.hero-main {
 
 /* ── PAGE HERO (inner pages) ── */
 .page-hero {
-  background: linear-gradient(to bottom, #09132B 0%, #0B1B3D 50%, #162E6B 80%, #FFFFFF 100%);
+  background: linear-gradient(to bottom, #09132B 0%, #0B1B3D 55%, #162E6B 85%, #1b3a6b 100%);
   padding: 8rem 5vw 4rem;
   position: relative;
   overflow: hidden;
@@ -2089,9 +2089,13 @@ footer {
 /* ══ MOBILE OPTIMIZATIONS & SEO ══ */
 /* Prevent Cumulative Layout Shift (CLS) on images */
 .portfolio-item img,
-.blog-mini-img img,
 .blog-featured-img img {
   aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.blog-mini-img img {
+  /* Blog mini thumbnails are small fixed-size — no aspect-ratio constraint */
   object-fit: cover;
 }
 
