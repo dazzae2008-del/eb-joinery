@@ -19,12 +19,14 @@
   --grey-mid: #e4e4e7;
   --grey-dark: #71717a;
 
-  --accent: #38bdf8;
-  /* High-contrast vibrant accent for dark backgrounds */
-  --accent-on-light: #0369a1;
-  /* Darker accent for on-light usage — contrast 5.9:1 on white */
-  --accent-dark: #0284c7;
-  --accent-light: #bae6fd;
+  --accent: #a8d8ea;
+  /* Soft pastel blue — for use on dark/navy backgrounds (hero, footer, badges) */
+  --accent-on-light: #1a5f7a;
+  /* Deep teal for text on white/light grey — contrast 5.8:1 on white */
+  --accent-dark: #1a7fa0;
+  /* Mid teal for interactive elements on light backgrounds */
+  --accent-light: #daeef6;
+  /* Very soft pastel wash for backgrounds/tints */
 
   --font-display: 'Archivo', sans-serif;
   --font-serif: 'Archivo', sans-serif;
@@ -127,7 +129,7 @@ nav {
 }
 
 .nav-logo span {
-  color: var(--accent);
+  color: var(--accent-on-light);
 }
 
 .nav-links {
@@ -271,7 +273,7 @@ main.hero-main {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, var(--accent) 0%, #38bdf8 100%);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
 }
 
 .page-hero-eyebrow {
@@ -640,7 +642,7 @@ section {
 .service-number {
   font-family: var(--font-display);
   font-size: 3rem;
-  color: var(--grey-light);
+  color: #c5dce6;
   line-height: 1;
   margin-bottom: 1rem;
   transition: color 0.3s;
@@ -671,7 +673,7 @@ section {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-on-light);
   text-decoration: none;
   margin-top: 1.2rem;
   transition: gap 0.2s;
