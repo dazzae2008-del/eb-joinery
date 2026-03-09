@@ -134,7 +134,7 @@ function initServiceCarousels() {
   document.querySelectorAll('.service-carousel[data-pool]').forEach(carousel => {
     const pool = imagePools[carousel.dataset.pool];
     if (!pool || !pool.length) return;
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
     if (isMobile) {
       /* MOBILE — one photo, fills the panel edge to edge via position:absolute */
@@ -261,6 +261,16 @@ function toggleMobile() {
   if (m) m.classList.toggle('open');
 }
 
+// Close mobile menu when a link is tapped
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      const m = document.getElementById('mobile-menu');
+      if (m) m.classList.remove('open');
+    });
+  });
+});
+
 /* ═══════════════════════════════════════
    SCROLL ANIMATIONS
 ═══════════════════════════════════════ */
@@ -308,15 +318,20 @@ function renderHomePortfolio() {
   const c = document.getElementById('home-portfolio-grid');
   if (!c) return;
   const list = shuffle(portfolioItems).slice(0, 6);
-  c.innerHTML = list.map(item => `
+  c.innerHTML = list.map((item, idx) => {
+    // First 3 items are likely above-the-fold — prioritise for LCP
+    const imgAttrs = idx < 3
+      ? `loading="eager" fetchpriority="high"`
+      : `loading="lazy"`;
+    return `
     <div class="portfolio-item" data-cat="${item.category}">
-      <img src="${getOptimizedUrl(item.img, 600)}" alt="${item.title}" loading="lazy" width="600" height="400">
+      <img src="${getOptimizedUrl(item.img, 600)}" alt="${item.title}" ${imgAttrs} width="600" height="400">
       <div class="portfolio-overlay">
         <div class="portfolio-cat">${catMeta[item.category]?.label || item.category}</div>
         <div class="portfolio-title">${item.title}</div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function filterPortfolio(cat, btn) {
@@ -503,6 +518,19 @@ function initBlogPost() {
     document.head.appendChild(canon);
   }
   canon.href = `https://ebjoinery.co.uk/blog-post.html?id=${post.id}`;
+
+  // Inject OG tags for social sharing
+  const setMeta = (prop, content, isName = false) => {
+    const attr = isName ? 'name' : 'property';
+    let el = document.querySelector(`meta[${attr}="${prop}"]`);
+    if (!el) { el = document.createElement('meta'); el.setAttribute(attr, prop); document.head.appendChild(el); }
+    el.content = content;
+  };
+  setMeta('og:title', `${post.title} | EB Joinery Widnes`);
+  setMeta('og:description', post.excerpt || post.title);
+  setMeta('og:image', getOptimizedUrl(post.img, 1200));
+  setMeta('og:url', `https://ebjoinery.co.uk/blog-post.html?id=${post.id}`);
+  setMeta('description', post.excerpt || post.title, true);
 
   c.innerHTML = `
     <div class="section-label">${post.tag}</div>
