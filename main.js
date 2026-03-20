@@ -16,6 +16,13 @@ const catMeta = {
 ═══════════════════════════════════════ */
 const imagePools = {
   kitchens: [
+    'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002719/WhatsApp_Image_2026-03-20_at_06.57.36_sbxzut.jpg',
+    'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002719/WhatsApp_Image_2026-03-20_at_06.57.36_2_oqkvrd.jpg',
+    'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002719/WhatsApp_Image_2026-03-20_at_06.57.36_1_lld4xy.jpg',
+    'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002719/WhatsApp_Image_2026-03-20_at_06.57.36_4_opsj0m.jpg',
+    'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002718/WhatsApp_Image_2026-03-20_at_06.57.36_5_tldtzv.jpg',
+    'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002718/WhatsApp_Image_2026-03-20_at_06.57.36_3_u8fivr.jpg',
+    'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002718/WhatsApp_Image_2026-03-20_at_06.57.36_6_kbnvid.jpg',
     'https://res.cloudinary.com/die5rq3ua/image/upload/v1772657462/473543467_1775541593199303_6408288811264688599_n_yvgu8e.webp',
     'https://res.cloudinary.com/die5rq3ua/image/upload/v1772657461/473421992_1775541536532642_3137829702208707218_n_xplshr.webp',
     'https://res.cloudinary.com/die5rq3ua/image/upload/v1772657447/471402948_1763736897713106_5932331483031696297_n_rmhblh.webp',
@@ -231,7 +238,8 @@ function initDataObjects() {
   // Rebuild Blog (with fetched data if available, else fallback)
   if (!blogPosts || blogPosts.length === 0) {
     blogPosts = [
-      { id: 1, featured: true, title: '5 Ways to Add Value to Your Home', slug: '5-ways-to-add-value-to-your-home', author: 'Ed Bates', date: '12 Nov 2024', tag: 'Tips', excerpt: 'Quality home improvements can transform your property and significantly boost its market value. Here are five upgrades that offer the best return on investment...', img: imagePools.kitchens[0] },
+      { id: 6, featured: true, title: 'Dark Shaker Kitchen with Hidden Larder — Widnes Project', slug: 'dark-shaker-kitchen-widnes', url: '/blog/dark-shaker-kitchen-widnes', author: 'Ed Bates', date: '20 Mar 2026', tag: 'Project', excerpt: 'A full kitchen transformation in Widnes — dark shaker units, Calacatta marble island, herringbone oak floor, and a bespoke hidden corner larder. Take a look at how it came together.', img: 'https://res.cloudinary.com/die5rq3ua/image/upload/v1774002719/WhatsApp_Image_2026-03-20_at_06.57.36_sbxzut.jpg' },
+      { id: 1, title: '5 Ways to Add Value to Your Home', slug: '5-ways-to-add-value-to-your-home', author: 'Ed Bates', date: '12 Nov 2024', tag: 'Tips', excerpt: 'Quality home improvements can transform your property and significantly boost its market value. Here are five upgrades that offer the best return on investment...', img: imagePools.kitchens[7] },
       { id: 2, title: 'How to Choose the Right Wood for Your Joinery', slug: 'how-to-choose-the-right-wood-for-your-joinery', author: 'Ed Bates', date: '28 Oct 2024', tag: 'Guide', img: imagePools.joinery[0] },
       { id: 3, title: 'Our Latest Loft Conversion — Before & After', slug: 'our-latest-loft-conversion-before-and-after', author: 'Ed Bates', date: '5 Oct 2024', tag: 'Project', img: imagePools['loft-conversions'][0] },
       { id: 4, title: 'Bathroom Trends for 2025', slug: 'bathroom-trends-for-2025', author: 'Ed Bates', date: '18 Sep 2024', tag: 'Tips', img: imagePools.bathrooms[0] },
@@ -370,15 +378,18 @@ function renderBlog() {
   if (!c) return;
   const featured = blogPosts.find(p => p.featured) || blogPosts[0];
   const rest = blogPosts.filter(p => p.id !== featured.id);
+
+  const getLink = (p) => p.url ? p.url : `/blog-post.html?slug=${p.slug}`;
+
   c.innerHTML = `
     <div class="blog-featured">
       <div class="blog-featured-img">
-        <a href="/blog/${featured.slug}">
+        <a href="${getLink(featured)}">
           <img src="${getOptimizedUrl(featured.img, 1200)}" style="width:100%;height:100%;object-fit:cover" alt="${featured.title}" loading="lazy">
         </a>
       </div>
       <div class="blog-tag">${featured.tag}</div>
-      <a href="/blog/${featured.slug}" class="blog-title-link">${featured.title}</a>
+      <a href="${getLink(featured)}" class="blog-title-link">${featured.title}</a>
       <div class="blog-meta">${featured.date} · By ${featured.author}</div>
       <p class="blog-excerpt">${featured.excerpt || ''}</p>
     </div>
@@ -386,12 +397,12 @@ function renderBlog() {
       ${rest.map(p => `
         <div class="blog-mini">
           <div class="blog-mini-img">
-            <a href="/blog/${p.slug}">
+            <a href="${getLink(p)}">
               <img src="${getOptimizedUrl(p.img, 76)}" alt="${p.title}" width="76" height="68" loading="lazy">
             </a>
           </div>
           <div>
-            <a href="/blog/${p.slug}" class="blog-mini-title" style="text-decoration:none;color:inherit;">${p.title}</a>
+            <a href="${getLink(p)}" class="blog-mini-title" style="text-decoration:none;color:inherit;">${p.title}</a>
             <div class="blog-mini-meta">${p.date} · ${p.tag}</div>
           </div>
         </div>
