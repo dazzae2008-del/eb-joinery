@@ -1,7 +1,18 @@
 [
     {
-        "id": 1,
+        "id": 6,
         "featured": true,
+        "title": "Dark Shaker Kitchen with Hidden Larder — Widnes Project",
+        "slug": "dark-shaker-kitchen-widnes",
+        "url": "/blog/dark-shaker-kitchen-widnes.html",
+        "author": "Ed Bates",
+        "date": "20 Mar 2026",
+        "tag": "Project",
+        "excerpt": "A full kitchen transformation in Widnes — dark shaker units, Calacatta marble island, herringbone oak floor, and a bespoke hidden corner larder. Take a look at how it came together.",
+        "img": "https://res.cloudinary.com/die5rq3ua/image/upload/v1774002719/WhatsApp_Image_2026-03-20_at_06.57.36_sbxzut.jpg"
+    },
+    {
+        "id": 1,
         "title": "5 Ways to Add Value to Your Home",
         "author": "Ed Bates",
         "date": "12 Nov 2024",
